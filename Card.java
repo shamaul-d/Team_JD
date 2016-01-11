@@ -8,5 +8,23 @@
 
 public class Card {
     private String value;
-    private String final 
+    private String final
+    private String cardOutline ="_________________
+	                         |               |
+                                 |               |
+                                 |               |
+                                 |               |
+                                 |               |
+                                 |               |
+                                 |               |
+                                 |               |
+                                 |               |
+                                 |               |
+                                 |_______________|";
+    
+
+
+
+
+
 }
