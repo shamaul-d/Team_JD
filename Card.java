@@ -36,18 +36,22 @@ public class Card {
 	value += "\n";
 	    }
 
+    public String getCard() {
+	return value;
+    }
+
     public static void main(String[] args) {
 	Card sham = new Card("9","heart");
 	System.out.println("Shamaul:");	
-	System.out.println(sham.value);
+	System.out.println(sham.getCard());
 	Card niels = new Card ("A","spade");
 	System.out.println("Niels:");	
-	System.out.println(niels.value);
+	System.out.println(niels.getCard());
 	Card kate = new Card ("3","diamond");
 	System.out.println("Kate:");	
-	System.out.println(kate.value);
+	System.out.println(kate.getCard());
 	Card brown = new Card ("K","club");
 	System.out.println("Mr. Brown:");	
-	System.out.println(brown.value);
+	System.out.println(brown.getCard());
     }
 }

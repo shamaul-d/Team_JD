@@ -15,3 +15,7 @@ ___________|_____________|_______________
 1-11-16     Shamaul       Made cardOutline for each card work, which Niels 
 	    		  started, and began to work on creating personalized
 			  cards for each playing card. 
+
+1-11-16     Shamaul       Finished Card.java, which now will create a card 
+	    		  given a value and a suit, and return a version of 
+			  the card to the user, in card format.
