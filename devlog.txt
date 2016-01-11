@@ -1,0 +1,8 @@
+Niels Graham, Shamaul Dilmohamed 
+APCS1 pd10
+Final Project -- Texas Hold'em Poker
+2016-1-11
+
+    Date   |     Name    |     Action
+___________|_____________|_______________
+1-11-16     Shamaul       Created devlog.txt to keep track of actions.
