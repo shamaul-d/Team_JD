@@ -8,27 +8,25 @@
 
 public class Card {
     private String value;
-<<<<<<< HEAD
-    private String final
-    private String cardOutline ="_________________
-	                         |               |
-                                 |               |
-                                 |               |
-                                 |               |
-                                 |               |
-                                 |               |
-                                 |               |
-                                 |               |
-                                 |               |
-                                 |               |
-                                 |_______________|";
+    private String cardOutline ="\t_________________\n" +  
+	                        "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|               |\n" +
+                                "\t|_______________|\n";
     
 
 
 
 
 
-=======
+
 
     private final String[] vals = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     // the list of values that a card can hold
@@ -36,5 +34,9 @@ public class Card {
     private final String[] suits = {"diamond", "clubs", "hearts", "spades"};
     // the list of suits a card can have
  
->>>>>>> origin/master
+
+    public static void main(String[] args) {
+	Card sham = new Card();
+	System.out.println(sham.cardOutline);
+    }
 }
