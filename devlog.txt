@@ -6,7 +6,12 @@ Final Project -- Texas Hold'em Poker
     Date   |     Name    |     Action
 ___________|_____________|_______________
 1-11-16     Shamaul       Created devlog.txt to keep track of actions.
+
 1-11-16     Shamaul/Niels Created Card.java, and worked on adding the qualities
 	    		  that each playing card has, such as its numerical 
 			  value and its suit. We also started working on 
 			  displaying cards with its atributes to the user.
+
+1-11-16     Shamaul       Made cardOutline for each card work, which Niels 
+	    		  started, and began to work on creating personalized
+			  cards for each playing card. 
