@@ -25,3 +25,7 @@ ___________|_____________|_______________
 
 1-12-16     Shamaul/Niels Cleared out mechanism for determining the best hand
 	    		  in a round on paper.
+
+1-12-16     Shamaul       Created Deck.java that represents a completed card
+	    		  deck, with shuffle functionality.
+	    		   
