@@ -16,7 +16,13 @@ public class Card {
 	for (int i = 0; i < 4; i++) {
 	    value += cardLine; //body of card
 	}
-	value += cardLine.substring(0,cardLine.length()-val.length()-9) + val + cardLine.substring(cardLine.length()-val.length()-8); // value in middle of card
+	if (! val.equals("10")) {
+		value += cardLine.substring(0,cardLine.length()-val.length()-9) + val + cardLine.substring(cardLine.length()-val.length()-8); // value in middle of card
+	    }
+	    else {
+		value += cardLine.substring(0,cardLine.length()-val.length()-9) + val + cardLine.substring(cardLine.length()-val.length()-7); 
+		// fixes bug when value is 10
+	    }
 	for (int i = 0; i < 4; i++) {
 	    value += cardLine; //body of card
 	}

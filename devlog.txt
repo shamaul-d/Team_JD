@@ -14,11 +14,10 @@ ___________|_____________|_______________
 
 1-11-16     Shamaul       Made cardOutline for each card work, which Niels 
 	    		  started, and began to work on creating personalized
-			  cards for each playing card. 
-
-1-11-16     Shamaul       Finished Card.java, which now will create a card 
-	    		  given a value and a suit, and return a version of 
-			  the card to the user, in card format.
+			  cards for each playing card. Also finished 
+			  Card.java, which now will create a card given a 
+			  value and a suit, and return a version of the card 
+			  to the user, in card format.
 
 1-12-16     Shamaul	  Finished commenting Card.java in order to maximize 
 	    		  understanding by an outside viewer.
@@ -27,5 +26,8 @@ ___________|_____________|_______________
 	    		  in a round on paper.
 
 1-12-16     Shamaul       Created Deck.java that represents a completed card
-	    		  deck, with shuffle functionality.
+	    		  deck, with shuffle functionality. Also fixed bug 
+			  that occured when Card values were 10 when 
+			  displaying the card.
+ 
 	    		   
