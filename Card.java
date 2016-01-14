@@ -7,7 +7,9 @@
 
 
 public class Card {
-    private String value;
+    private String value; //Printed Card (Ascii)
+    private String pin; //Stored Suit
+    private String rank; //ex: king, jack, seven 
     private String cardLine = "\t|               |\n"; //body of each playing card
 
     public Card(String val, String suit) {
@@ -32,12 +34,22 @@ public class Card {
 	    value += Character.toString((char)175); // aesthetics; bottom of card 
 	}
 	value += "\n";
-	    }
+	pin = suit;
+	rank = val;
+    }
 
     public String toString() {
 	return value;
     }
+    
+    public String getRank(){
+	return rank;
+    }
 
+    public String getSuit(){
+	return suit;
+    }
+	    
     public static void main(String[] args) {
 	Card sham = new Card("9","heart");
 	System.out.println("Shamaul:");	
