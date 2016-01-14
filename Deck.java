@@ -53,6 +53,10 @@ public class Deck {
 	return ans;
 	//returns whole deck, will not be used in game itself
     }
+    
+    public Card getCard(int x, int y) {
+	return deck[x][y];
+    }
 
     public static void main(String[] args) {
 	Deck ash = new Deck();

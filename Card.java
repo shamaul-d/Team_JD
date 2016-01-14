@@ -47,7 +47,7 @@ public class Card {
     }
 
     public String getSuit(){
-	return suit;
+	return pin;
     }
 	    
     public static void main(String[] args) {
