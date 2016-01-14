@@ -33,3 +33,6 @@ ___________|_____________|_______________
 1-13-16     Shamaul       Thought/wrote down ideas for the structure of 
 	    		  Table.java as well as User.java. Also tested (not 
 			  successfully) new ways to display each card.	 
+
+1-14-16	    Niels 	  Expanded card classes from just an aesthetic additive
+			  to a usable class to store card values.
