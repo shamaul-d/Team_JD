@@ -15,11 +15,11 @@ public class Player{
     public int getHandLevel(){
 	return fullHand;
     }
-    //=============Winnning Hand Calculation Helper Functions===========
-    public int[] toInt(String[] x){
+    //=============Winnning Hand Calculation Helper Functions==========
+    /*    public int[] toInt(String[] x){
 	int[] retInt = new int[x.lenght];
 	for (int i = 0; i < x.length; i++){
-	    if (x[i].equals("J")
+	if (x[i].equals("J") */
 	
     public void sortArray(int[] x) { //used in isStraight
 	for(int i=1; i<x.length; i++) {
@@ -39,5 +39,6 @@ public class Player{
 	    numValsString[i] = x[i].getRank();
 	}
 	numVals = sortArray(numVals);
-	(1,4,5,6,7,8,k)
+	// (1,4,5,6,7,8,k)
     }
+}

@@ -12,13 +12,21 @@ public class Table {
 
     public Table(Player[] gamblers){
 	deck = new Deck();
-	deck.shuffle(); //shuffles cards to get ready for hand
-	main = {10,0}
-	side = {0,0};
-	bets = gamblers.length;
+	main = new int[2];
+	main[0] = 10; //main[1] will get value of 0
+	side = new int[2]; // both indices will get val of 0
+	bets = new boolean[gamblers.length];
 	for (int i = 0; i < bets.length; i++) {
 	    bets[i] = true;
 	}
+	river = setRiver();
     }
-	
+    
+    public Card[] setRiver(){
+	Card[] ans; 
+	deck.shuffle();
+	ans = new Card[]{deck.getCard(0,0), deck.getCard(0,1), deck.getCard(0,2), deck.getCard(0,3), deck.getCard(0,4)};
+	return ans;
+    }
+    
 }    
