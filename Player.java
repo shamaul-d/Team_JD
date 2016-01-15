@@ -52,7 +52,7 @@ public class Player{
 	}
     }
 
-    public int[] cardToInt(Card[] x){
+    public int[] cardToInt(Card[] x){ //creates a int[] with the values of the cards in Card[]
 	String[] numValsString =  new String[7];
 	int[] numValsInt = new int[7];
 	for (int i = 0; i < 7; i++){ //Removes the number values of cards and adds them to numVal
@@ -62,6 +62,15 @@ public class Player{
 	sortArray(numValsInt);
 	return numValsInt;
     }
+
+    public String[] cardToSuit(Card[] x){
+	String[] retString = new String[7];
+	for (int i = 0; i < 7; i++)
+	    retString[i] = x[i].getSuit();
+	return retString;
+    }
+
+	
     //===========Winning Hand Calculation Function=======================
     public boolean isStraight(Card[] x){
 	boolean retBol = false;
@@ -95,6 +104,25 @@ public class Player{
 	    }
 	}
 	return retBol;
+    }
+
+    public boolean isFlush(Card[] x){
+	boolean retBol = false;
+	String[] suits = cardToSuit(x);
+	int counter = 0;
+	for(int i = 0; i < 3; i++){
+	    counter = 0; //reset counter
+	    for (int j = i; j < suits.length; i++){
+		if(suits[i].equals(suits[j]))
+		    counter++;
+	    }
+	    if (counter == 4){
+		retBol = true;
+		break;
+	    }
+	}
+	return retBol;
+	
     }
     
 }
