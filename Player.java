@@ -70,7 +70,7 @@ public class Player{
 	return retString;
     }
 
-    public int isThreeOfAKindRetInt(Card[] x){ //returns the card number that there are three of 
+    public int threeOfAKindRetInt(Card[] x){ //returns the card number that there are three of 
 	int[] cardVals = new int[7];
 	int counter = 0;
 	int retInt = 0;
@@ -89,7 +89,23 @@ public class Player{
 	return retInt;
     }
 
-    
+    public int[] listRemove(int[] x, int y){
+	int[] retArray = new int[4];
+	int counter = 0;
+	for(int i = 0; i < 7; i++){
+	    if(x[i] != y){
+		retArray[counter] = x[i];
+		counter++;
+	    }
+	}
+	return retArray;
+    }
+
+    public int fourArrayPair(int[] x){
+	int retInt;
+	
+	
+	
 
 	
     //===========Winning Hand Calculation Function=======================
@@ -172,12 +188,19 @@ public class Player{
 	return retBol;
     }
 
-    /*    
+   
     public boolean isFullHouse(Card[] x){
 	boolean retBol = false;
 	int[] cardValue = cardToInt(x);
+	int threepair = 0;
         if (isThreeOfAKind(x))
-    */
+	    threepair = threeOfAKindRetInt(x);
+	else
+	    return false;
+	int[] fourCard = listRemove(x, threepair); //returns a 4 int long array with the three pair removed
+	
+	
+    
 
 
     public static void main(String[] args) {
