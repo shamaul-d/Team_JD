@@ -29,4 +29,16 @@ public class Table {
 	return ans;
     }
     
+    public Card retCard(int ctr){
+	return river[ctr];
+    }
+    
+    public static void main(String[] args) {
+	Player niels = new Player();
+	Table asher = new Table(new Player[]{niels});
+	asher.setRiver();
+	for (int i = 0; i < 5; i++) {
+	    System.out.println(asher.retCard(i));
+	}
+    }
 }    
