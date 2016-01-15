@@ -31,7 +31,7 @@ public class Player{
 		retInt[i] = 11;
 	    else if (x[i].equals("Q"))
 		retInt[i] = 12;
-	    else if (x[i].equals("k"))
+	    else if (x[i].equals("K"))
 		retInt[i] = 13;
 	    else if (x[i].equals("A"))
 		retInt[i] = 14;
@@ -171,11 +171,28 @@ public class Player{
 	}
 	return retBol;
     }
-    
+
+    /*    
     public boolean isFullHouse(Card[] x){
 	boolean retBol = false;
 	int[] cardValue = cardToInt(x);
         if (isThreeOfAKind(x))
-    
+    */
 
+
+    public static void main(String[] args) {
+	Player me = new Player();
+	Table a = new Table(new Player[] {me});
+	Deck c = new Deck();
+	me.hand = new Card[]{c.getCard(1,0), c.getCard(1,1)};
+	me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
+	while (! (me.isStraight(me.fullHand))) {
+	    c.shuffle();
+	me.hand = new Card[]{c.getCard(1,0), c.getCard(1,1)};
+	me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
+	}
+	for (int i = 0; i < 7; i++) {
+	    System.out.println(me.fullHand[i]);
+	}
+    }
 }
