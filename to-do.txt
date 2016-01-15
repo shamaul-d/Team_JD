@@ -1,1 +1,7 @@
 list of stuff we have to do
+- finish table. java 
+- finish working on algos that will determine highest hand 
+- finish player. Java
+- start work on Driver which will keep game running 
+- create save game functionality
+- work on CPU induction
