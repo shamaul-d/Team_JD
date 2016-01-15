@@ -70,6 +70,27 @@ public class Player{
 	return retString;
     }
 
+    public int isThreeOfAKindRetInt(Card[] x){ //returns the card number that there are three of 
+	int[] cardVals = new int[7];
+	int counter = 0;
+	int retInt = 0;
+	cardVals = cardToInt(x);
+	for(int i = 0; i < 4; i++){
+	    counter = 0; //reset counter
+	    for (int j = i; j < cardVals.length; i++){
+		if(cardVals[i] == cardVals[j])
+		    counter++;
+	    }
+	    if (counter == 3){
+		retInt = cardVals[i];
+		break;
+	    }
+	}
+	return retInt;
+    }
+
+    
+
 	
     //===========Winning Hand Calculation Function=======================
     public boolean isStraightFlush(Card[] x){
@@ -132,4 +153,29 @@ public class Player{
 	
     }
     
+    public boolean isThreeOfAKind(Card[] x){
+	boolean retBol = false;
+	int[] cardVals = new int[7];
+	int counter = 0;
+	cardVals = cardToInt(x);
+	for(int i = 0; i < 4; i++){
+	    counter = 0; //reset counter
+	    for (int j = i; j < cardVals.length; i++){
+		if(cardVals[i] == cardVals[j])
+		    counter++;
+	    }
+	    if (counter == 3){
+		retBol = true;
+		break;
+	    }
+	}
+	return retBol;
+    }
+    
+    public boolean isFullHouse(Card[] x){
+	boolean retBol = false;
+	int[] cardValue = cardToInt(x);
+        if (isThreeOfAKind(x))
+    
+
 }
