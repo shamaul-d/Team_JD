@@ -72,6 +72,13 @@ public class Player{
 
 	
     //===========Winning Hand Calculation Function=======================
+    public boolean isStraightFlush(Card[] x){
+	if (isStraight(x) && isFlush(x))
+	    return true;
+	else
+	    return false;
+    }
+
     public boolean isStraight(Card[] x){
 	boolean retBol = false;
 	int[] numValsInt = new int[7];
