@@ -37,4 +37,4 @@ ___________|_____________|_______________
 1-14-16	    Niels 	  Expanded card classes from just an aesthetic additive
 			  to a usable class to store card values.
 
-1-15-16	    Niels 	  Added isStraight and helper function
+1-15-16	    Niels 	  Added isStraight, isFourOfAKind, and helper function

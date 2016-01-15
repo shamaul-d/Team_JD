@@ -78,13 +78,23 @@ public class Player{
 	return retBol;
     }
     
-    /*public boolnea isFourOfAKind(Card[] x){
+    public boolean isFourOfAKind(Card[] x){
 	boolean retBol = false;
 	int[] cardVals = new int[7];
+	int counter = 0;
 	cardVals = cardToInt(x);
-	
-	
-
+	for(int i = 0; i < 3; i++){
+	    counter = 0; //reset counter
+	    for (int j = i; j < cardVals.length; i++){
+		if(cardVals[i] == cardVals[j])
+		    counter++;
+	    }
+	    if (counter == 4){
+		retBol = true;
+		break;
+	    }
+	}
+	return retBol;
     }
-    */
+    
 }
