@@ -80,8 +80,9 @@ public class Player{
 
     public String[] cardToSuit(Card[] x){
 	String[] retString = new String[7];
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 7; i++) {
 	    retString[i] = x[i].getSuit();
+    }
 	return retString;
     }
 
@@ -129,9 +130,9 @@ public class Player{
 	    return true;
 	else
 	    return false;
-    }
+	    } 
 
-    public boolean isStraight(Card[] x){
+    public boolean isStraight(Card[] x){ //broken
 	boolean retBol = false;
 	int[] numValsInt = new int[7];
 	numValsInt = cardToInt(x);
@@ -171,11 +172,11 @@ public class Player{
 	int counter = 0;
 	for(int i = 0; i < 3; i++){
 	    counter = 0; //reset counter
-	    for (int j = i; j < suits.length; i++){
+	    for (int j = i; j < suits.length; j++){
 		if(suits[i].equals(suits[j]))
 		    counter++;
 	    }
-	    if (counter == 4){
+	    if (counter >= 4){
 		retBol = true;
 		break;
 	    }
@@ -229,7 +230,7 @@ public class Player{
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.cardToInt(me.fullHand)[i]);
 	}
-	System.out.println(me.isStraight(me.fullHand));
+	System.out.println(me.isFlush(me.fullHand));
 
 	System.out.println(me.showHand());
 	    /*
