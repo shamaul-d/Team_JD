@@ -11,6 +11,18 @@ public class Player{
     private int chips; //How much monies you have
     private Card[] fullHand = new Card[7]; //the river and Player's hand in one array
     private int handLevel;
+
+    //=============User Functions==========================
+
+    public String showHand(){
+	String ans = "";
+	for (int x = 0; x < 2; x++) {
+	    ans += hand[x];
+	    ans += "\n";
+	}
+	return ans;
+    }
+
     //=============Get Functions==========================
     public Card[] getHand(){
 	return hand;
@@ -42,12 +54,14 @@ public class Player{
     }
 	
     public int[] sortArray(int[] x) { //simple least to greatest int sort
-	for(int i =  0; i < x.length - 1; i++) {
-	    int temp = 0;
-	    if(x[i] > x[i+1]) {
-		temp = x[i];
-		x[i] = x[i+1];
-		x[i+1] = temp;
+	for (int z = x.length - 1; z > 0; z--) { 
+	    for(int i =  0; i < x.length - 1; i++) {
+		int temp = 0;
+		if(x[i] > x[i+1]) {
+		    temp = x[i];
+		    x[i] = x[i+1];
+		    x[i+1] = temp;
+		}
 	    }
 	}
 	return x;
@@ -216,6 +230,8 @@ public class Player{
 	    System.out.println(me.cardToInt(me.fullHand)[i]);
 	}
 	System.out.println(me.isStraight(me.fullHand));
+
+	System.out.println(me.showHand());
 	    /*
 	while (! (me.isStraight(me.fullHand))) {
 	    a.getDeck().shuffle();
