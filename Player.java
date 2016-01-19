@@ -41,15 +41,16 @@ public class Player{
 	return retInt;
     }
 	
-    public void sortArray(int[] x) { //simple least to greatest int sort
-	for(int i=1; i<x.length; i++) {
-	    int temp=0;
-	    if(x[i-1] > x[i]) {
-		temp = x[i-1];
-		x[i-1] = x[i];
-		x[i] = temp;
+    public int[] sortArray(int[] x) { //simple least to greatest int sort
+	for(int i =  0; i < x.length - 1; i++) {
+	    int temp = 0;
+	    if(x[i] > x[i+1]) {
+		temp = x[i];
+		x[i] = x[i+1];
+		x[i+1] = temp;
 	    }
 	}
+	return x;
     }
 
     public int[] cardToInt(Card[] x){ //creates a int[] with the values of the cards in Card[]
@@ -59,7 +60,7 @@ public class Player{
 	    numValsString[i] = x[i].getRank();
 	}
 	numValsInt = toInt(numValsString);
-	sortArray(numValsInt);
+	numValsInt = sortArray(numValsInt);
 	return numValsInt;
     }
 
@@ -101,8 +102,8 @@ public class Player{
 	return retArray;
     }
 
-    public int fourArrayPair(int[] x){
-	int retInt;
+    //    public int fourArrayPair(int[] x){
+    //	int retInt;
 	
 	
 	
@@ -188,7 +189,7 @@ public class Player{
 	return retBol;
     }
 
-   
+    /*
     public boolean isFullHouse(Card[] x){
 	boolean retBol = false;
 	int[] cardValue = cardToInt(x);
@@ -198,7 +199,7 @@ public class Player{
 	else
 	    return false;
 	int[] fourCard = listRemove(x, threepair); //returns a 4 int long array with the three pair removed
-	
+	} */	
 	
     
 
@@ -206,16 +207,24 @@ public class Player{
     public static void main(String[] args) {
 	Player me = new Player();
 	Table a = new Table(new Player[] {me});
-	Deck c = new Deck();
-	me.hand = new Card[]{c.getCard(1,0), c.getCard(1,1)};
+	me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
 	me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
+	for (int i = 0; i < 7; i++) {
+	    System.out.println(me.fullHand[i]);
+	}
+	for (int i = 0; i < 7; i++) {
+	    System.out.println(me.cardToInt(me.fullHand)[i]);
+	}
+	System.out.println(me.isStraight(me.fullHand));
+	    /*
 	while (! (me.isStraight(me.fullHand))) {
-	    c.shuffle();
-	me.hand = new Card[]{c.getCard(1,0), c.getCard(1,1)};
+	    a.getDeck().shuffle();
+	    me.hand = new Card[]{a.getDeck().getCard(1,0), a.getDeck().getCard(1,1)};
 	me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
 	}
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
+	    */
     }
 }

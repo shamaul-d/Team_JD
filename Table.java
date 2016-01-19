@@ -24,13 +24,17 @@ public class Table {
     
     public Card[] setRiver(){
 	Card[] ans; 
-	deck.shuffle();
+	//deck.shuffle();
 	ans = new Card[]{deck.getCard(0,0), deck.getCard(0,1), deck.getCard(0,2), deck.getCard(0,3), deck.getCard(0,4)};
 	return ans;
     }
     
     public Card retCard(int ctr){
 	return river[ctr];
+    }
+    
+    public Deck getDeck() {
+	return deck;
     }
     
     public static void main(String[] args) {
