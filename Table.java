@@ -57,6 +57,10 @@ public class Table {
 	    }
 	}
     }
+
+    public void call(Player a) {
+
+    }
     
     public static void main(String[] args) {
 	Player niels = new Player();

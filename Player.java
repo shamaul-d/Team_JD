@@ -23,7 +23,7 @@ public class Player{
 	return ans;
     }
 
-    //=============Get Functions==========================
+    //=============Get/Set Functions==========================
     public Card[] getHand(){
 	return hand;
     }
@@ -35,6 +35,11 @@ public class Player{
     public int getHandLevel(){
 	return handLevel;
     }
+    
+    public int setChips(int va) {
+	chips = va;
+    }
+
     //=============Winnning Hand Calculation Helper Functions===========
     public static int[] toInt(String[] x){ //turns the card rank into ints
 	int[] retInt = new int[x.length];
