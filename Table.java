@@ -29,6 +29,7 @@ public class Table {
 	Card[] ans; 
 	//deck.shuffle();
 	ans = new Card[]{deck.getCard(0,0), deck.getCard(0,1), deck.getCard(0,2), deck.getCard(0,3), deck.getCard(0,4)};
+
 	return ans;
     }
     

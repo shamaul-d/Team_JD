@@ -98,7 +98,7 @@ public class Player{
 	cardVals = cardToInt(x);
 	for(int i = 0; i < 4; i++){
 	    counter = 0; //reset counter
-	    for (int j = i; j < cardVals.length; i++){
+	    for (int j = i; j < cardVals.length; j++){
 		if(cardVals[i] == cardVals[j])
 		    counter++;
 	    }
@@ -125,7 +125,7 @@ public class Player{
     public boolean fourArrayPair(int[] x){ //used in fullhouse 
 	boolean retBol = false;
 	for(int i = 0; i < 4; i++){
-	    for(int j = i; j < 4; j++){
+	    for(int j = i + 1; j < 4; j++){
 		if(x[i] == x[j])
 		    retBol = true;
 	    }
@@ -206,7 +206,7 @@ public class Player{
 	cardVals = cardToInt(x);
 	for(int i = 0; i < 4; i++){
 	    counter = 0; //reset counter
-	    for (int j = i; j < cardVals.length; i++){
+	    for (int j = i; j < cardVals.length; j++){
 		if(cardVals[i] == cardVals[j])
 		    counter++;
 	    }
@@ -228,10 +228,10 @@ public class Player{
 	else
 	    return false;
 	int[] fourCard = listRemove(cardValue, threepair); //returns a 4 int long array with the three pair removed
+	System.out.println(fourCard.length);
 	if (fourArrayPair(fourCard))
-	    return true;
-	else
-	    return false;
+	    retBol = true;
+	return retBol;
 	}
 
     public boolean isOnePair(Card[] x){
@@ -258,7 +258,7 @@ public class Player{
 	    System.out.println(me.fullHand[i]);
 	}
 	// ^^ test setup mech, if want to mess with go to table 
-	System.out.print(me.isFourOfAKind(me.fullHand));
+	System.out.print(me.isFullHouse(me.fullHand));
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
