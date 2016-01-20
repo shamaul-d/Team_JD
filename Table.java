@@ -9,6 +9,8 @@ public class Table {
     private Card[] river; // holds the cards for the river
     
     private Deck deck; // holds a deck of cards
+    
+    private Player[] plays; // players in game
 
     public Table(Player[] gamblers){
 	deck = new Deck();
@@ -20,12 +22,14 @@ public class Table {
 	    bets[i] = true;
 	}
 	river = setRiver();
+	plays = gamblers;
     }
     
     public Card[] setRiver(){
 	Card[] ans; 
 	//deck.shuffle();
-	ans = new Card[]{deck.getCard(0,4), deck.getCard(1,0), deck.getCard(3,0), deck.getCard(2,0), deck.getCard(2,2)};
+	ans = new Card[]{deck.getCard(0,0), deck.getCard(0,1), deck.getCard(0,2), deck.getCard(0,3), deck.getCard(0,4)};
+
 	return ans;
     }
     
@@ -36,6 +40,24 @@ public class Table {
     public Deck getDeck() {
 	return deck;
     }
+
+    public boolean isFolded(Player c) {
+	for (int x = 0; x < plays.length; x++) {
+	    if (c.toString().equals(plays[x].toString())) {
+		return bets[x];
+	    }
+	}
+	return false;
+    }
+
+    public void fold(Player a) {
+	for (int x = 0; x < plays.length; x++) {
+	    if (a.toString().equals(plays[x].toString())) {
+		bets[x] = false;
+		break;
+	    }
+	}
+    }
     
     public static void main(String[] args) {
 	Player niels = new Player();
@@ -44,5 +66,8 @@ public class Table {
 	for (int i = 0; i < 5; i++) {
 	    System.out.println(asher.retCard(i));
 	}
+	System.out.println(asher.isFolded(niels));
+	asher.fold(niels);
+	System.out.println(asher.isFolded(niels));
     }
 }    
