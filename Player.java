@@ -136,7 +136,7 @@ public class Player{
 	boolean retBol = false;
 	int[] numValsInt = new int[7];
 	numValsInt = cardToInt(x);
-	for (int i = 0; i < 3; i++){
+	for (int i = 0; i < 2; i++){
 	    if(numValsInt[i] == numValsInt[i+1]-1)
 		if(numValsInt[i] == numValsInt[i+2]-2)
 		    if(numValsInt[i] == numValsInt[i+3]-3)
@@ -204,7 +204,7 @@ public class Player{
 	return retBol;
     }
 
-    /*
+    
     public boolean isFullHouse(Card[] x){
 	boolean retBol = false;
 	int[] cardValue = cardToInt(x);
@@ -214,7 +214,9 @@ public class Player{
 	else
 	    return false;
 	int[] fourCard = listRemove(x, threepair); //returns a 4 int long array with the three pair removed
-	} */	
+	}
+
+    public boolean isOnePair(Card[] x){
 	
     
 
@@ -222,7 +224,7 @@ public class Player{
     public static void main(String[] args) {
 	String [] test = new String[] {"A", "K", "4"};
 	System.out.println(toInt(test)); 
-	/*	Player me = new Player();
+	Player me = new Player();
 	Table a = new Table(new Player[] {me});
 	me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
 	System.out.println(me.hand);
@@ -234,15 +236,6 @@ public class Player{
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.cardToInt(me.fullHand)[i]);
 	}
-<<<<<<< Updated upstream
-	System.out.println(me.isFlush(me.fullHand));
-
-	System.out.println(me.showHand());
-	    /*
-=======
-	System.out.println(me.isStraight(me.fullHand));
-	    
->>>>>>> Stashed changes
 	while (! (me.isStraight(me.fullHand))) {
 	    a.getDeck().shuffle();
 	    me.hand = new Card[]{a.getDeck().getCard(1,0), a.getDeck().getCard(1,1)};
@@ -251,6 +244,6 @@ public class Player{
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
-	*/ 
+	
     }
 }
