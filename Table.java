@@ -25,7 +25,7 @@ public class Table {
     public Card[] setRiver(){
 	Card[] ans; 
 	//deck.shuffle();
-	ans = new Card[]{deck.getCard(0,0), deck.getCard(1,0), deck.getCard(3,0), deck.getCard(2,0), deck.getCard(2,3)};
+	ans = new Card[]{deck.getCard(0,4), deck.getCard(1,0), deck.getCard(3,0), deck.getCard(2,0), deck.getCard(2,3)};
 	return ans;
     }
     

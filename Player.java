@@ -201,7 +201,7 @@ public class Player{
 	cardVals = cardToInt(x);
 	for(int i = 0; i < 4; i++){
 	    counter = 0; //reset counter
-	    for (int j = i; j < cardVals.length; i++){
+	    for (int j = i; j < cardVals.length; j++){
 		if(cardVals[i] == cardVals[j])
 		    counter++;
 	    }
@@ -253,7 +253,7 @@ public class Player{
 	    System.out.println(me.fullHand[i]);
 	}
 	// ^^ test setup mech, if want to mess with go to table 
-	System.out.print(me.isFourOfAKind(me.fullHand));
+	System.out.print(me.isThreeOfAKind(me.fullHand));
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
