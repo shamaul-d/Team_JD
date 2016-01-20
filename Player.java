@@ -36,7 +36,7 @@ public class Player{
 	return handLevel;
     }
     //=============Winnning Hand Calculation Helper Functions===========
-    public int[] toInt(String[] x){ //turns the card rank into ints
+    public static int[] toInt(String[] x){ //turns the card rank into ints
 	int[] retInt = new int[x.length];
 	for (int i = 0; i < x.length; i++){
 	    if (x[i].equals("J"))
@@ -220,9 +220,13 @@ public class Player{
 
 
     public static void main(String[] args) {
-	Player me = new Player();
+	String [] test = new String[] {"A", "K", "4"};
+	System.out.println(toInt(test)); 
+	/*	Player me = new Player();
 	Table a = new Table(new Player[] {me});
 	me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
+	System.out.println(me.hand);
+	
 	me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
@@ -230,10 +234,15 @@ public class Player{
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.cardToInt(me.fullHand)[i]);
 	}
+<<<<<<< Updated upstream
 	System.out.println(me.isFlush(me.fullHand));
 
 	System.out.println(me.showHand());
 	    /*
+=======
+	System.out.println(me.isStraight(me.fullHand));
+	    
+>>>>>>> Stashed changes
 	while (! (me.isStraight(me.fullHand))) {
 	    a.getDeck().shuffle();
 	    me.hand = new Card[]{a.getDeck().getCard(1,0), a.getDeck().getCard(1,1)};
@@ -242,6 +251,6 @@ public class Player{
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
-	    */
+	*/ 
     }
 }
