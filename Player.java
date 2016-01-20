@@ -161,9 +161,9 @@ public class Player{
 	int[] cardVals = new int[7];
 	int counter = 0;
 	cardVals = cardToInt(x);
-	for(int i = 0; i < 3; i++){
+	for(int i = 0; i < 2; i++){
 	    counter = 0; //reset counter
-	    for (int j = i; j < cardVals.length; i++){
+	    for (int j = i; j < cardVals.length; j++){
 		if(cardVals[i] == cardVals[j])
 		    counter++;
 	    }
@@ -243,31 +243,23 @@ public class Player{
     
 
 
-    /*  public static void main(String[] args) {
-	System.out.println(toInt(test)); 
+    public static void main(String[] args){
 	Player me = new Player();
 	Table a = new Table(new Player[] {me});
 	me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
 	System.out.println(me.hand);
-	
 	me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
-	for (int i = 0; i < 7; i++) {
-	    System.out.println(me.cardToInt(me.fullHand)[i]);
-	}
-	while (! (me.isStraight(me.fullHand))) {
-	    a.getDeck().shuffle();
-	    me.hand = new Card[]{a.getDeck().getCard(1,0), a.getDeck().getCard(1,1)};
-	me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
-	}
+	// ^^ test setup mech, if want to mess with go to table 
+	System.out.print(me.isFourOfAKind(me.fullHand));
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
 	
 
     }
-    */
+    
 }
 
