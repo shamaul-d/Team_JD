@@ -117,8 +117,17 @@ public class Player{
 	return retArray;
     }
 
-    //    public int fourArrayPair(int[] x){
-    //	int retInt;
+    public boolean fourArrayPair(int[] x){ //used in fullhouse 
+	boolean retBol = false;
+	for(int i = 0; i < 4; i++){
+	    for(int j = i; j < 4; j++){
+		if(x[i] == x[j])
+		    retBol = true;
+	    }
+	}
+	return retBol;
+    }
+
 	
 	
 	
@@ -213,16 +222,28 @@ public class Player{
 	    threepair = threeOfAKindRetInt(x);
 	else
 	    return false;
-	int[] fourCard = listRemove(x, threepair); //returns a 4 int long array with the three pair removed
+	int[] fourCard = listRemove(cardValue, threepair); //returns a 4 int long array with the three pair removed
+	if (fourArrayPair(fourCard))
+	    return true;
+	else
+	    return false;
 	}
 
     public boolean isOnePair(Card[] x){
-	
+	boolean retBol = false;
+	int[] cardValue = cardToInt(x);
+	for(int i = 0; i < 7; i++){
+	    for(int j = i; j < 7; j++){
+		if(cardValue[i] == cardValue[j])
+		    retBol = true;
+	    }
+	}
+	return retBol;
+    }
     
 
 
-    public static void main(String[] args) {
-	String [] test = new String[] {"A", "K", "4"};
+    /*  public static void main(String[] args) {
 	System.out.println(toInt(test)); 
 	Player me = new Player();
 	Table a = new Table(new Player[] {me});
@@ -245,5 +266,8 @@ public class Player{
 	    System.out.println(me.fullHand[i]);
 	}
 	
+
     }
+    */
 }
+
