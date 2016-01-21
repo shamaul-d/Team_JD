@@ -36,7 +36,7 @@ public class Player{
 	return handLevel;
     }
     
-    public int setChips(int va) {
+    public void setChips(int va) {
 	chips = va;
     }
 

@@ -41,7 +41,7 @@ public class Table {
 	return deck;
     }
 
-    public boolean isFolded(Player c) {
+    public boolean isNotFolded(Player c) {
 	for (int x = 0; x < plays.length; x++) {
 	    if (c.toString().equals(plays[x].toString())) {
 		return bets[x];
@@ -60,7 +60,14 @@ public class Table {
     }
 
     public void call(Player a) {
+	main[1] += main[0];
+	a.setChips(a.getChips() - main[0]);
+    }
 
+    public void raise(Player a, int bet) {
+	main[1] += bet;
+	main[0] = bet;
+	a.setChips(a.getChips() - main[0]);
     }
     
     public static void main(String[] args) {
@@ -70,8 +77,17 @@ public class Table {
 	for (int i = 0; i < 5; i++) {
 	    System.out.println(asher.retCard(i));
 	}
-	System.out.println(asher.isFolded(niels));
+	System.out.println(asher.isNotFolded(niels));
+	niels.setChips(100);
+	asher.call(niels);
+	System.out.println(niels.getChips());
+	asher.raise(niels, 50);
+	System.out.println(niels.getChips());
+	System.out.println("                          ");
+	for (int x = 0; x < 2; x++) {
+	    System.out.println(asher.main[x]);
+	}
 	asher.fold(niels);
-	System.out.println(asher.isFolded(niels));
+	System.out.println(asher.isNotFolded(niels));
     }
 }    
