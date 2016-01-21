@@ -29,7 +29,6 @@ public class Table {
 	Card[] ans; 
 	//deck.shuffle();
 	ans = new Card[]{deck.getCard(0,0), deck.getCard(0,1), deck.getCard(0,2), deck.getCard(0,3), deck.getCard(0,4)};
-
 	return ans;
     }
     
@@ -39,6 +38,16 @@ public class Table {
     
     public Deck getDeck() {
 	return deck;
+    }
+    
+    public int countGams() {
+	int num = 0;
+	for (int x = 0; x < bets.length; x++) {
+	    if (bets[x]) {
+		num += 1;
+	    }
+	}
+	return num;
     }
 
     public boolean isNotFolded(Player c) {
@@ -59,15 +68,41 @@ public class Table {
 	}
     }
 
-    public void call(Player a) {
-	main[1] += main[0];
-	a.setChips(a.getChips() - main[0]);
+    public void call(Player a, int[] pot) {
+	if (pot[0] >= a.getChips()) {
+	    allIn(a, pot);
+	    return;
+	}
+	pot[1] += pot[0];
+	a.setChips(a.getChips() - pot[0]);
     }
 
-    public void raise(Player a, int bet) {
-	main[1] += bet;
-	main[0] = bet;
-	a.setChips(a.getChips() - main[0]);
+    public void raise(Player a, int[] pot, int bet) {
+	if (pot[0] >= a.getChips()) {
+	    allIn(a, pot);
+	    return;
+	}
+	pot[1] += bet;
+	pot[0] = bet;
+	a.setChips(a.getChips() - pot[0]);
+    }
+
+    public void allIn(Player a , int[] pot) {
+	pot[1] += a.getChips();
+	a.setChips(0);
+	if (countGams() == 2) {
+	    for (int x = 0; x < plays.length; x++) {
+		if (isNotFolded(plays[x])) {
+		    plays[x].setChips(plays[x].getChips() + main[0]);
+		    break;
+		}
+	    }
+	}
+	else {
+	    if (pot == main) {
+		
+	    }
+	}
     }
     
     public static void main(String[] args) {
@@ -79,9 +114,9 @@ public class Table {
 	}
 	System.out.println(asher.isNotFolded(niels));
 	niels.setChips(100);
-	asher.call(niels);
+	asher.call(niels, asher.main);
 	System.out.println(niels.getChips());
-	asher.raise(niels, 50);
+	asher.raise(niels, asher.main, 50);
 	System.out.println(niels.getChips());
 	System.out.println("                          ");
 	for (int x = 0; x < 2; x++) {
