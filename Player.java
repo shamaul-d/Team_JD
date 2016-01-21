@@ -91,7 +91,7 @@ public class Player{
 	return retString;
     }
 
-    public int threeOfAKindRetInt(Card[] x){ //returns the card number that there are three of 
+    public int threeOfAKindRetInt(Card[] x){ //returns the card number that there are three of
 	int[] cardVals = new int[7];
 	int counter = 0;
 	int retInt = 0;
@@ -133,7 +133,31 @@ public class Player{
 	return retBol;
     }
 
-	
+    public int isOnePairReturn(Card[] x){
+	int retInt = 0;
+	int[] cardValue = cardToInt(x);
+	for(int i = 0; i < 6; i++){
+	    for(int j = i + 1; j < 7; j++){
+		if(cardValue[i] == cardValue[j])
+		    retInt = cardValue[j];
+	    }
+	}
+	return retInt;
+    }
+
+    public boolean intIsOnePair(int[] x){//used in isTwoPair
+	boolean retBol = false;
+	for(int i = 0; i < x.length -1; i++){
+	    for(int j = i + 1; j < x.length; j++){
+		if(x[i] == x[j])
+		    retBol = true;
+	    }
+	}
+	return retBol;
+    }
+
+
+
 	
 	
 
@@ -234,6 +258,19 @@ public class Player{
 	return retBol;
 	}
 
+    public boolean isTwoPair(Card[] x){
+	boolean retBol = false;
+	int[] cardValue = cardToInt(x);
+	if (isOnePair(x)){
+	    int firstPair = isOnePairReturn(x);
+	    int[] fiveCard = listRemove(cardValue, firstPair);
+	    if (intIsOnePair(fiveCard))
+		retBol = true;
+	
+	}
+	return retBol;
+    }
+
     public boolean isOnePair(Card[] x){
 	boolean retBol = false;
 	int[] cardValue = cardToInt(x);
@@ -245,9 +282,10 @@ public class Player{
 	}
 	return retBol;
     }
+
+    // put on hold till compairTo is completed public card highCard(Card[] x){ 
+	
     
-
-
     public static void main(String[] args){
 	Player me = new Player();
 	Table a = new Table(new Player[] {me});
