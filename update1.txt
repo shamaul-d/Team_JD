@@ -1,0 +1,16 @@
+Obstacles Overcome (and how!)
+It was easy to get over the issue of creating cards and eventually a whole deck of cards. This was achieved by first creating a class Card, which held the value of the playing card as well as the suit, and created a String representation of the card in the terminal. The class Deck naturally came after that, which used the constants values and suits to create all 52 cards in a playing deck. We then had to create an class that allowed for the complete interaction between each player and the deck (which is necessary in a poker game), so we created a Table class, which handles betting mechanisms as well as dealing cards to players, essentially having the main framework of a poker game in place as of right now.
+	
+Unresolved Issues
+We have yet to encounter any truly unresolvable issues. It seems many of our issues are resolvable given that we write enough helper functions to simplify the task at hand. However we’ve yet to hit a sort of brick wall that stops us dead in our track. Our solutions, though sometimes long, still seem to be working. In addition, while it is not impossible to fix, it will be a bit annoying having to deal with the situation when players go all in during a turn, but we anticipate that this can be resolved in the next day or two.
+
+Cool Stuff Learned (conceptual and/or practical)
+The most practical thing I have learned is the amazing simplicity of using helper functions in their truest sense. Functions that are not made to be dynamic but instead address one very known and very annoying problem. Before this we had never faced such a multifaceted challenge as this one regarding the many different types of poker hands so we had no need for such functions. But this is a real world example of their practicality. 
+
+Mid-development Design Changes (and why!)
+So far we have not made any drastic changes. The biggest shift we have done is conceptualizing a more robust card-rank system to determine who has the best hand. This is less of a change and more of just a flushing through as prior to this we only had a very abstract understanding of how we may compare hand strengths. 
+
+Lessons Learned (...which you might apply to future projects, CSor otherwise) ...have you achieved flow?
+Flow has been achieved! Especially when writing simpler functions that, once conceptualized, are just grinding out tons of lines of code. It is very easy to lose track of time when you are producing code all under the same ideas. 
+Even github has trouble when two people work on the same file. We had to coordinate with each other while working on classes to make sure we weren’t doing anything in any location that was remotely close to each other.
+
