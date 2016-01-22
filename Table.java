@@ -100,7 +100,7 @@ public class Table {
 	}
 	else {
 		side[0] += a.getChips();
-		if (side[1] > a.getChips()) {
+		if (side[1] < a.getChips()) {
 		    side[1] = a.getChips();
 		}
 		a.setChips(0);
