@@ -127,6 +127,9 @@ public class Table {
 	    System.out.println(asher.main[x]);
 	}
 	asher.fold(niels);
+	for (int x = 0; x < 2; x++) {
+	    System.out.println(asher.side[x]);
+	}	
 	System.out.println(asher.isNotFolded(niels));
     }
 }    
