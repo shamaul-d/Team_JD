@@ -37,7 +37,7 @@ public class Card {
 	pin = suit;
 	rank = val;
     }
-
+    //=============Get Functions====================
     public String toString() {
 	return value;
     }
@@ -49,6 +49,48 @@ public class Card {
     public String getSuit(){
 	return pin;
     }
+    //===============idk what's here=================
+    public static int toInt(String x){ //turns the card rank into ints, used in compareTo
+	int retInt;
+	if (x.equals("J"))
+	    retInt = 11;
+	else if (x.equals("Q"))
+	    retInt = 12;
+	else if (x.equals("K"))
+	    retInt = 13;
+	else if (x.equals("A"))
+	    retInt = 14;
+	else
+	    retInt = Integer.parseInt(x);
+    return retInt;
+    }
+
+    public int suitToInt(String x){//used in compareTo
+	int retInt = 0; 
+	if (x.equals("diamond"))
+	    retInt = 1;
+	if (x.equals("club"))
+	    retInt = 2;
+	if (x.equals("heart"))
+	    retInt = 3;
+	if (x.equals("spade"))
+	    retInt = 4;
+	return retInt;
+    }
+    
+    public int compareTo(Card a){
+	int retInt = 0;
+	if (toInt(this.getRank()) == toInt(a.getRank())){
+	    if (suitToInt(this.getSuit()) > suitToInt(a.getSuit()))
+		retInt = 1;
+	}
+	else if (toInt(this.getRank()) >  toInt(a.getRank()))
+	    retInt = 1;
+	else if (toInt(this.getRank()) <  toInt(a.getRank()))
+	    retInt = -1;
+	return retInt;
+    }
+	    
 	    
     public static void main(String[] args) {
 	Card sham = new Card("9","heart");
