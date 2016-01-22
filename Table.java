@@ -99,9 +99,9 @@ public class Table {
 	    }
 	}
 	else {
-	    if (pot == main) {
-		
-	    }
+		side[0] += a.getChips();
+		side[1] += a.getChips();
+		a.setChips(0);
 	}
     }
     
@@ -118,6 +118,8 @@ public class Table {
 	System.out.println(niels.getChips());
 	asher.raise(niels, asher.main, 50);
 	System.out.println(niels.getChips());
+	asher.allIn(niels, asher.main);
+	System.out.println(niels.getChips());	
 	System.out.println("                          ");
 	for (int x = 0; x < 2; x++) {
 	    System.out.println(asher.main[x]);
