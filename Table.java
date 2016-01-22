@@ -109,7 +109,9 @@ public class Table {
     
     public static void main(String[] args) {
 	Player niels = new Player();
-	Table asher = new Table(new Player[]{niels});
+	Player sham = new Player();
+	Player anna = new Player();
+	Table asher = new Table(new Player[]{niels, sham, anna});
 	asher.setRiver();
 	for (int i = 0; i < 5; i++) {
 	    System.out.println(asher.retCard(i));
