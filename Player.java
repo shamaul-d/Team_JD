@@ -340,7 +340,15 @@ public class Player{
 	return retBol;
     }
 
-    
+    //===============Card Return Functions==============
+    public static Card highCard(Card[] x){
+	Card retCard = x[0];
+	for (int i = 0; i < x.length; i++){
+	    if ( retCard.compareTo(x[i]) < 0)
+		retCard = x[i];
+	}
+	return retCard;
+    }
 	
     
     public static void main(String[] args){
@@ -357,7 +365,7 @@ public class Player{
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
-	System.out.println(me.hand[0].compareTo(me.hand[1]));
+	System.out.println(highCard(me.fullHand));
     }
     
 }
