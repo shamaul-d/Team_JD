@@ -10,7 +10,7 @@ public class Player{
     private Card[] hand = new Card[2]; 
     private int chips; //How much monies you have
     private Card[] fullHand = new Card[7]; //the river and Player's hand in one array
-    private int handLevel;
+    private int handLevel; //highest is best 
 
     //=============User Functions==========================
 
@@ -40,6 +40,9 @@ public class Player{
 	chips = va;
     }
 
+    //public void setHandLevel() {
+    //	if (isOnePair
+    
     //=============Winnning Hand Calculation Helper Functions===========
     public static int[] toInt(String[] x){ //turns the card rank into ints
 	int[] retInt = new int[x.length];
@@ -121,7 +124,7 @@ public class Player{
 	}
 	return retArray;
     }
-
+	    
     public boolean fourArrayPair(int[] x){ //used in fullhouse 
 	boolean retBol = false;
 	for(int i = 0; i < 4; i++){
@@ -144,7 +147,7 @@ public class Player{
 	}
 	return retInt;
     }
-
+	    
     public boolean intIsOnePair(int[] x){//used in isTwoPair
 	boolean retBol = false;
 	for(int i = 0; i < x.length -1; i++){
@@ -155,32 +158,70 @@ public class Player{
 	}
 	return retBol;
     }
+    
+    public int[] removeDouble(int[] x){         
+        int j = 0;
+        int i = 1;
+        while(i < x.length){
+            if(x[i] == x[j]){
+                i++;
+            }else{
+                x[++j] = x[i++];
+            }   
+        }
+        int[] output = new int[j+1];
+        for(int k=0; k<output.length; k++){
+            output[k] = x[k];
+        }
+         
+        return output;
+    }
 
-
-
-	
-	
-
-	
-    //===========Winning Hand Calculation Function=======================
+    public boolean aceSwitch(int[] x){//turns aces from 14 to 1
+	boolean retBol =  false;
+	for (int i = 0; i < x.length; i++){
+	    if (x[i] == 14){
+		x[i] = 1;
+		retBol = true;
+	    }
+	}
+	return retBol;
+    }
+	    
+	    
+		//===========Winning Hand Calculation Function=======================
     public boolean isStraightFlush(Card[] x){
 	if (isStraight(x) && isFlush(x))
 	    return true;
 	else
 	    return false;
-	    } 
+    } 
 
     public boolean isStraight(Card[] x){ //broken
 	boolean retBol = false;
-	int[] numValsInt = new int[7];
-	numValsInt = cardToInt(x);
-	for (int i = 0; i < 2; i++){
+	int[] numInt = new int[7];
+	int counter = 0;
+	numInt = cardToInt(x);
+	int[] numValsInt = removeDouble(numInt);
+	for (int i = 0; i < numValsInt.length - 2; i++){
 	    if(numValsInt[i] == numValsInt[i+1]-1)
 		if(numValsInt[i] == numValsInt[i+2]-2)
 		    if(numValsInt[i] == numValsInt[i+3]-3)
 			if(numValsInt[i] == numValsInt[i+4]-4)
 			    if(numValsInt[i] == numValsInt[i+5]-5)
 				retBol = true;
+	}
+	if (!retBol){
+	    if (aceSwitch(numValsInt)){ //Checks with both ace values 
+		for (int i = 0; i < numValsInt.length - 2; i++){
+		    if(numValsInt[i] == numValsInt[i+1]-1)
+			if(numValsInt[i] == numValsInt[i+2]-2)
+			    if(numValsInt[i] == numValsInt[i+3]-3)
+				if(numValsInt[i] == numValsInt[i+4]-4)
+				    if(numValsInt[i] == numValsInt[i+5]-5)
+					retBol = true;
+		}
+	    }
 	}
 	return retBol;
     }
@@ -283,7 +324,7 @@ public class Player{
 	return retBol;
     }
 
-    // put on hold till compairTo is completed public card highCard(Card[] x){ 
+    
 	
     
     public static void main(String[] args){
@@ -300,8 +341,7 @@ public class Player{
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
-	
-
+	System.out.println(me.hand[0].compareTo(me.hand[1]));
     }
     
 }
