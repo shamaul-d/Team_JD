@@ -40,8 +40,24 @@ public class Player{
 	chips = va;
     }
 
-    //public void setHandLevel() {
-    //	if (isOnePair
+    public void setHandLevel() {
+    	if (isStraightFlush(fullHand))
+	    handLevel = 8;
+	if (isFourOfAKind(fullHand))
+	    handLevel = 7;
+	if (isFullHouse(fullHand))
+	    handLevel = 6;
+	if (isFlush(fullHand))
+	    handLevel = 5;
+	if (isStraight(fullHand))
+	    handLevel = 4;
+	if (isThreeOfAKind(fullHand))
+	    handLevel = 3;
+	if (isTwoPair(fullHand))
+	    handLevel = 2;
+	if (isOnePair(fullHand))
+	    handLevel = 1;
+    }
     
     //=============Winnning Hand Calculation Helper Functions===========
     public static int[] toInt(String[] x){ //turns the card rank into ints
