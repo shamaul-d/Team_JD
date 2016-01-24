@@ -71,6 +71,8 @@ public class Player{
 	    handLevel = 2;
 	if (isOnePair(fullHand))
 	    handLevel = 1;
+	else 
+	    handLevel = 0;
     }
     
     //=============Winnning Hand Calculation Helper Functions===========
@@ -90,7 +92,7 @@ public class Player{
 	}
 	return retInt;
     }
-	
+    
     public int[] sortArray(int[] x) { //simple least to greatest int sort
 	for (int z = x.length - 1; z > 0; z--) { 
 	    for(int i =  0; i < x.length - 1; i++) {
@@ -104,7 +106,7 @@ public class Player{
 	}
 	return x;
     }
-
+    
     public int[] cardToInt(Card[] x){ //creates a int[] with the values of the cards in Card[]
 	String[] numValsString =  new String[7];
 	int[] numValsInt = new int[7];
@@ -115,15 +117,15 @@ public class Player{
 	numValsInt = sortArray(numValsInt);
 	return numValsInt;
     }
-
+    
     public String[] cardToSuit(Card[] x){
 	String[] retString = new String[7];
 	for (int i = 0; i < 7; i++) {
 	    retString[i] = x[i].getSuit();
-    }
+	}
 	return retString;
     }
-
+    
     public int threeOfAKindRetInt(Card[] x){ //returns the card number that there are three of
 	int[] cardVals = new int[7];
 	int counter = 0;
@@ -154,7 +156,7 @@ public class Player{
 	}
 	return retArray;
     }
-	    
+    
     public boolean fourArrayPair(int[] x){ //used in fullhouse 
 	boolean retBol = false;
 	for(int i = 0; i < 4; i++){
@@ -165,7 +167,7 @@ public class Player{
 	}
 	return retBol;
     }
-
+    
     public int isOnePairReturn(Card[] x){
 	int retInt = 0;
 	int[] cardValue = cardToInt(x);
@@ -177,7 +179,7 @@ public class Player{
 	}
 	return retInt;
     }
-	    
+    
     public boolean intIsOnePair(int[] x){//used in isTwoPair
 	boolean retBol = false;
 	for(int i = 0; i < x.length -1; i++){
@@ -203,10 +205,10 @@ public class Player{
         for(int k=0; k<output.length; k++){
             output[k] = x[k];
         }
-         
+        
         return output;
     }
-
+    
     public boolean aceSwitch(int[] x){//turns aces from 14 to 1
 	boolean retBol =  false;
 	for (int i = 0; i < x.length; i++){
@@ -217,9 +219,9 @@ public class Player{
 	}
 	return retBol;
     }
-	    
-	    
-		//===========Winning Hand Calculation Function=======================
+    
+    
+    //===========Winning Hand Calculation Function=======================
     public boolean isStraightFlush(Card[] x){
 	if (isStraight(x) && isFlush(x))
 	    return true;
