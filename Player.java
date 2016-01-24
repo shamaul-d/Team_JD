@@ -45,6 +45,15 @@ public class Player{
 	hand[1] = b;
     }
 
+    public void setFullHand(Card[] hand, Card[] riv) {
+	for (int x = 0; x < 2; x++) {
+	    fullHand[x] = hand[x];
+	}
+	for (int y = 0; y < 5; y++) {
+	    fullHand[y+2] = riv[y];
+	}
+    }
+
     public void setHandLevel() {
     	if (isStraightFlush(fullHand))
 	    handLevel = 8;
