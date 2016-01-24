@@ -59,20 +59,7 @@ public class Player{
         hand[0] = a;
         hand[1] = b;
     }
-
-    public void setFullHand(Card[] hand, Card[] riv) {
-        for (int x = 0; x < 2; x++) {
-            fullHand[x] = hand[x];
-        }
-        for (int y = 0; y < 5; y++) {
-            fullHand[y+2] = riv[y];
-        }
-    }
-
-    public void setHand(Card a, Card b) {
-	hand[0] = a;
-	hand[1] = b;
-    }
+ 
  
     public void setFullHand(Card[] hand, Card[] riv) {
 	for (int x = 0; x < 2; x++) {
@@ -427,6 +414,8 @@ public class Player{
 	return retArray;
     }
 
+
+
     //===============CompareTo Functions================
 
 
@@ -449,14 +438,34 @@ public class Player{
 			    retInt = -1;
 		    }
 		}
-		else if (a.getHandLevel() == 2){
+		else if (this.getHandLevel() == 2){
 		    int[] twoPairHandA = sortArray(twoPairGet(this.getFullHand()));
 		    int[] twoPairHandB = sortArray(twoPairGet(a.getFullHand()));
+		    if (twoPairHandA[1] > twoPairHandB[1])
+			retInt = 1;
+		    else if (twoPairHandB[1] > twoPairHandA[1])
+			retInt = -1;
+		    else if (twoPairHandB[1] == twoPairHandA[1]){
+			if (twoPairHandA[0] > twoPairHandB[0])
+			    retInt = -1;
+			else
+			    retInt = 1;
+		    }
 		}
+		else if (this.getHandLevel() == 3){
+		    if(getOnePair(this.getFullHand()) > getOnePair(a.getFullHand()))
+			retInt = 1;
+		    else if(getOnePair(this.getFullHand()) < getOnePair(a.getFullHand()))
+			retInt = -1;
+		    else if(getOnePair(this.getFullHand()) == getOnePair(a.getFullHand()))
+			retInt = 0;
+		}
+
+				
 			
 	    }
-	    return retInt;
-        }
+	    return retInt;   
+	}
 
 
 
