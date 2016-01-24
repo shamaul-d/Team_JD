@@ -14,6 +14,14 @@ public class Player{
 
     //=============User Functions==========================
 
+    public Player() {
+	setChips(100);
+    }
+
+    public Player (int ch) {
+	setChips(ch);
+    }
+
     public String showHand(){
 	String ans = "";
 	for (int x = 0; x < 2; x++) {
@@ -382,6 +390,10 @@ public class Player{
 	    System.out.println(me.fullHand[i]);
 	}
 	System.out.println(highCard(me.fullHand));
+	Player niels = new Player();
+	System.out.println(niels.getChips());
+	Player sham = new Player(1000);
+	System.out.println(sham.getChips());
     }
     
 }
