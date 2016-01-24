@@ -31,6 +31,8 @@ public class Player{
 	return ans;
     }
 
+   
+
     //=============Get/Set Functions==========================
     public Card[] getHand(){
 	return hand;
@@ -46,20 +48,6 @@ public class Player{
     
     public void setChips(int va) {
 	chips = va;
-    }
-    
-    public void setHand(Card a, Card b) {
-	hand[0] = a;
-	hand[1] = b;
-    }
-
-    public void setFullHand(Card[] hand, Card[] riv) {
-	for (int x = 0; x < 2; x++) {
-	    fullHand[x] = hand[x];
-	}
-	for (int y = 0; y < 5; y++) {
-	    fullHand[y+2] = riv[y];
-	}
     }
 
     public void setHandLevel() {
@@ -79,8 +67,6 @@ public class Player{
 	    handLevel = 2;
 	if (isOnePair(fullHand))
 	    handLevel = 1;
-	else 
-	    handLevel = 0;
     }
     
     //=============Winnning Hand Calculation Helper Functions===========
@@ -100,7 +86,7 @@ public class Player{
 	}
 	return retInt;
     }
-    
+	
     public int[] sortArray(int[] x) { //simple least to greatest int sort
 	for (int z = x.length - 1; z > 0; z--) { 
 	    for(int i =  0; i < x.length - 1; i++) {
@@ -114,7 +100,7 @@ public class Player{
 	}
 	return x;
     }
-    
+
     public int[] cardToInt(Card[] x){ //creates a int[] with the values of the cards in Card[]
 	String[] numValsString =  new String[7];
 	int[] numValsInt = new int[7];
@@ -125,15 +111,15 @@ public class Player{
 	numValsInt = sortArray(numValsInt);
 	return numValsInt;
     }
-    
+
     public String[] cardToSuit(Card[] x){
 	String[] retString = new String[7];
 	for (int i = 0; i < 7; i++) {
 	    retString[i] = x[i].getSuit();
-	}
+    }
 	return retString;
     }
-    
+
     public int threeOfAKindRetInt(Card[] x){ //returns the card number that there are three of
 	int[] cardVals = new int[7];
 	int counter = 0;
@@ -164,7 +150,7 @@ public class Player{
 	}
 	return retArray;
     }
-    
+	    
     public boolean fourArrayPair(int[] x){ //used in fullhouse 
 	boolean retBol = false;
 	for(int i = 0; i < 4; i++){
@@ -175,7 +161,7 @@ public class Player{
 	}
 	return retBol;
     }
-    
+
     public int isOnePairReturn(Card[] x){
 	int retInt = 0;
 	int[] cardValue = cardToInt(x);
@@ -187,7 +173,7 @@ public class Player{
 	}
 	return retInt;
     }
-    
+	    
     public boolean intIsOnePair(int[] x){//used in isTwoPair
 	boolean retBol = false;
 	for(int i = 0; i < x.length -1; i++){
@@ -213,10 +199,10 @@ public class Player{
         for(int k=0; k<output.length; k++){
             output[k] = x[k];
         }
-        
+         
         return output;
     }
-    
+
     public boolean aceSwitch(int[] x){//turns aces from 14 to 1
 	boolean retBol =  false;
 	for (int i = 0; i < x.length; i++){
@@ -227,16 +213,16 @@ public class Player{
 	}
 	return retBol;
     }
-    
-    
-    //===========Winning Hand Calculation Function=======================
+	    
+	    
+		//===========Winning Hand Calculation Function=======================
     public boolean isStraightFlush(Card[] x){
 	if (isStraight(x) && isFlush(x))
 	    return true;
 	else
 	    return false;
     } 
-    
+
     public boolean isStraight(Card[] x){ //broken
 	boolean retBol = false;
 	int[] numInt = new int[7];
@@ -365,7 +351,7 @@ public class Player{
     }
 
     //===============Card Return Functions==============
-    public static Card highCard(Card[] x){
+    public  Card highCard(Card[] x){
 	Card retCard = x[0];
 	for (int i = 0; i < x.length; i++){
 	    if ( retCard.compareTo(x[i]) < 0)
@@ -373,9 +359,40 @@ public class Player{
 	}
 	return retCard;
     }
-	
+
+    public int getOnePair(Card[] x){
+	int retInt = -1;
+	int[] cardValue = cardToInt(x);
+	for(int i = 0; i < 7; i++){
+	    for(int j = i; j < 7; j++){
+		if(cardValue[i] == cardValue[j])
+		    retInt = cardValue[i];
+	    }
+	}
+	return retInt;
+    }
+
+    //===============CompareTo Functions================
+
     
-    public static void main(String[] args){
+	public int compareTo(Player a){
+	    int retInt = 0;
+	    if (this.getHandLevel() > a.getHandLevel())
+		retInt = 1;
+	    else if (this.getHandLevel() < a.getHandLevel())
+		retInt = -1;
+	    else
+		if (a.getHandLevel() == 1)
+		    retInt = 1;
+	    return retInt;
+	}
+	
+
+
+
+		
+    
+    /* public static void main(String[] args){
 	Player me = new Player();
 	Table a = new Table(new Player[] {me});
 	me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
@@ -395,6 +412,7 @@ public class Player{
 	Player sham = new Player(1000);
 	System.out.println(sham.getChips());
     }
+    */
     
 }
 
