@@ -18,7 +18,7 @@ public class Player{
 	setChips(100);
     }
 
-    public Player (int ch) {
+    public Player(int ch) {
 	setChips(ch);
     }
 
@@ -48,6 +48,20 @@ public class Player{
     
     public void setChips(int va) {
 	chips = va;
+    }
+
+    public void setHand(Card a, Card b) {
+	hand[0] = a;
+	hand[1] = b;
+    }
+ 
+    public void setFullHand(Card[] hand, Card[] riv) {
+	for (int x = 0; x < 2; x++) {
+	    fullHand[x] = hand[x];
+	}
+	for (int y = 0; y < 5; y++) {
+	    fullHand[y+2] = riv[y];
+	}
     }
 
     public void setHandLevel() {
