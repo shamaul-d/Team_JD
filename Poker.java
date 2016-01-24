@@ -6,8 +6,6 @@ import java.io.InputStreamReader;
 import cs1.Keyboard;
 
 public class Poker {
-    static Player[] pl;
-    static String[] names;
     
     public static void start() {
 	String response = Keyboard.readString();
@@ -34,6 +32,7 @@ public class Poker {
 	    start();
 	}
     }
+<<<<<<< HEAD
 
     public static void setup() {
 	System.out.print("How many players want to play? (2-12): ");
