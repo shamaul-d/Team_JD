@@ -1,0 +1,24 @@
+As is the case with many other card games, Texas Hold'em is a game based off 
+of bets. At the beginning of every turn, each player is given 2 cards, and 
+based on the strength of the cards, each player wagers money in the pot, 
+if they believe they have the best hand (or if they think they can force every 
+other player to fold). After every hand, one card in the five card river is 
+revealed, and further bets are taken. When all of the cards in the river are 
+revealed, the remaining players will have their hand's compared, and the 
+player with the highest hand will receive the whole pot. Hands are organized  
+as follows: 
+
+-Straight Flush (Five cards with consecutive values and the same suit) 
+-Four of a Kind (Four cards with the same value) 
+-Full House (A three of a kind of one card, and a pair of another card) 
+-Flush (Five cards that share the same suit, but are not consecutive) 
+-Straight (Five cards that have consecutive values, but are not the same suit) 
+-Three of a Kind  (Three cards that share the same value) 
+-Two Pair (Two instances of a pair in a single hand) 
+-One Pair (Two cards that share the same value)      
+-High Card (When none of the above apply, the card with the highest value is  
+compared) 
+
+That's it! Now go on and play some poker! 
+
+P.S. If you go bankrupt that's it. Sorry!
