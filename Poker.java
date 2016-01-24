@@ -1,5 +1,8 @@
 // driver for poker game
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import cs1.Keyboard;
 
 public class Poker {
@@ -9,6 +12,17 @@ public class Poker {
 	if (response.equals("y")) {
 	    System.out.println("\nOkay, here you go! \n");
 	    // file which contains rules of poker displayed here
+	    try {
+		FileInputStream st = new FileInputStream("Pokerrules.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(st));
+		String line = "";
+		while ((line = br.readLine()) != null) {
+		    System.out.println(line);
+		}
+	    }	    
+	    catch (Exception e) {
+		System.out.println("Sorry, we couldn't find the file.");
+	    }
 	}
 	else if (response.equals("n")) {
 	    System.out.println("\nAwesome, on to the game! \n");
