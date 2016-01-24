@@ -39,6 +39,20 @@ public class Player{
     public void setChips(int va) {
 	chips = va;
     }
+    
+    public void setHand(Card a, Card b) {
+	hand[0] = a;
+	hand[1] = b;
+    }
+
+    public void setFullHand(Card[] hand, Card[] riv) {
+	for (int x = 0; x < 2; x++) {
+	    fullHand[x] = hand[x];
+	}
+	for (int y = 0; y < 5; y++) {
+	    fullHand[y+2] = riv[y];
+	}
+    }
 
     //=============Winnning Hand Calculation Helper Functions===========
     public static int[] toInt(String[] x){ //turns the card rank into ints
@@ -300,8 +314,6 @@ public class Player{
 	for (int i = 0; i < 7; i++) {
 	    System.out.println(me.fullHand[i]);
 	}
-	
-
     }
     
 }

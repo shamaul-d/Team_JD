@@ -27,9 +27,26 @@ public class Table {
     
     public Card[] setRiver(){
 	Card[] ans; 
-	//deck.shuffle();
+	deck.shuffle();
 	ans = new Card[]{deck.getCard(0,0), deck.getCard(0,1), deck.getCard(0,2), deck.getCard(0,3), deck.getCard(0,4)};
 	return ans;
+    }
+
+    public void deal() {
+	int num = plays.length;
+	if (num > 6) { //max 10 players
+	    for (int x = 0; x < 6; x++) {
+		plays[x].setHand(deck.getCard(2,2*x), deck.getCard(2,2*x+1));
+	    }
+	    for (int y = 0; y < num - 6; y++) {
+		plays[y+6].setHand(deck.getCard(3,2*y), deck.getCard(3,2*y+1));
+	    }
+	}
+	else {
+	    for (int z = 0; z < plays.length; z++) {
+		plays[z].setHand(deck.getCard(2,2*z), deck.getCard(2,2*z+1));
+	    }	    
+	}
     }
     
     public Card retCard(int ctr){
@@ -115,6 +132,19 @@ public class Table {
 	asher.setRiver();
 	for (int i = 0; i < 5; i++) {
 	    System.out.println(asher.retCard(i));
+	}
+	asher.deal();
+	System.out.println("----------------niels---------------");
+	for (int x = 0; x < 2; x++) {
+	    System.out.println(niels.getHand()[x]);
+	}
+	System.out.println("----------------sham---------------");
+	for (int x = 0; x < 2; x++) {
+	    System.out.println(sham.getHand()[x]);
+	}
+	System.out.println("----------------anna---------------");
+	for (int x = 0; x < 2; x++) {
+	    System.out.println(anna.getHand()[x]);
 	}
 	System.out.println(asher.isNotFolded(niels));
 	niels.setChips(100);
