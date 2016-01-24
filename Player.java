@@ -257,7 +257,7 @@ public class Player{
             return false;
     }
 
-    public boolean isStraight(Card[] x){ //broken
+    public boolean isStraight(Card[] x){
         boolean retBol = false;
         int[] numInt = new int[7];
         int counter = 0;
@@ -414,6 +414,46 @@ public class Player{
 	return retArray;
     }
 
+    public int[] getStraight(Card[] x){
+        int[] retArray = new int[5];
+        int[] numInt = new int[7];
+        numInt = cardToInt(x);
+        int[] numValsInt = removeDouble(numInt);
+        for (int i = 0; i < numValsInt.length - 2; i++){
+            if(numValsInt[i] == numValsInt[i+1]-1)
+                if(numValsInt[i] == numValsInt[i+2]-2)
+                    if(numValsInt[i] == numValsInt[i+3]-3)
+                        if(numValsInt[i] == numValsInt[i+4]-4)
+                            if(numValsInt[i] == numValsInt[i+5]-5){
+                                retArray[0] = numValsInt[i];
+				retArray[1] = numValsInt[i+1];
+				retArray[2] = numValsInt[i+2];
+				retArray[3] = numValsInt[i+3];
+				retArray[4] = numValsInt[i+4];
+			    }
+        }
+        if (!retBol){
+            if (aceSwitch(numValsInt)){ //Checks with both ace values
+                for (int i = 0; i < numValsInt.length - 2; i++){
+                    if(numValsInt[i] == numValsInt[i+1]-1)
+                        if(numValsInt[i] == numValsInt[i+2]-2)
+                            if(numValsInt[i] == numValsInt[i+3]-3)
+                                if(numValsInt[i] == numValsInt[i+4]-4)
+                                    if(numValsInt[i] == numValsInt[i+5]-5){
+					retArray[0] = numValsInt[i];
+					retArray[1] = numValsInt[i+1];
+					retArray[2] = numValsInt[i+2];
+					retArray[3] = numValsInt[i+3];
+					retArray[4] = numValsInt[i+4];
+				    }
+                                        
+                }
+            }
+        }
+        return retArray;
+    }
+
+
 
 
     //===============CompareTo Functions================
@@ -460,7 +500,8 @@ public class Player{
 		    else if(getOnePair(this.getFullHand()) == getOnePair(a.getFullHand()))
 			retInt = 0;
 		}
-
+		else if (this.gethHandLevel() == 4){
+		    
 				
 			
 	    }
