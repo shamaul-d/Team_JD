@@ -129,6 +129,12 @@ public class Table {
 	}
     }
 
+    public void win(Player p, int[] pot) {
+	p.setChips(p.getChips() + pot[1]);
+	pot[1] = 0;
+	pot[0] = 10;
+    }
+
     public void play(String[] names) {
 	int[] pot = main;
 	ArrayList<Player> remain = new ArrayList<Player>();
@@ -187,10 +193,7 @@ public class Table {
 	    for (int r = 1; r < plays.length + 1; r++) {
 		if (remain.get(0) == plays[r-1]) {
 		    System.out.println("Congratulations! Player "+ r + "(" + names[r-1] + ") has won the pot!");
-		    for (int n = 1; n < plays.length + 1; n++) {
-			System.out.println("Player " + n + "(" + names[n-1] + ") had: ");
-			System.out.println(plays[n-1].showHand());
-		    }
+		    win(plays[r-1],main);
 		    break;
 		}
 	    }
@@ -199,11 +202,27 @@ public class Table {
 	    for (int q = 1; q < plays.length + 1; q++) {
 		if ((remain.get(0) == plays[q-1]) && plays[q-1].getChips() ==0) {
 		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the side pot!");
+		    win(plays[q-1],side);
 		    while (remain.get(q).getChips() != 0) {
-			
+			q++;
 		    }
+		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the main pot!");
+		    win(plays[q-1],main);
+		}
+		else if (remain.get(0) == plays[q-1]) {
+		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the main pot!");
+		    win(plays[q-1],main);
+		    while (remain.get(q).getChips() == 0) {
+			q++;
+		    }
+		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the side pot!");
+		    win(plays[q-1],side);
 		}
 	    }
+	}
+	for (int n = 1; n < plays.length + 1; n++) {
+	    System.out.println("Player " + n + "(" + names[n-1] + ") had: ");
+	    System.out.println(plays[n-1].showHand());
 	}
     }
 
