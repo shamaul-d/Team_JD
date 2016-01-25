@@ -129,7 +129,7 @@ public class Table {
 	}
     }
 
-    public void play() {
+    public void play(String[] names) {
 	int[] pot = main;
 	ArrayList<Player> remain = new ArrayList<Player>();
 	setRiver();
@@ -159,7 +159,7 @@ public class Table {
 		    }
 		    else {
 			System.out.println("Sorry, we didn't get that.");
-			play();
+			play(names);
 			return;
 		    }
 		}
@@ -176,7 +176,7 @@ public class Table {
 	}
 	for (int b = 0; b < remain.size(); b++) {
 	    for (int m = remain.size()-1; m > 1; m--) {
-		if (remain.get(m-1).compareTo(remain.get(m) > 0)) {
+		if (remain.get(m-1).compareTo(remain.get(m)) > 0) {
 		    Player temp = remain.get(m-1);
 		    remain.set(m-1, remain.get(m));
 		    remain.set(m, temp);
@@ -194,18 +194,19 @@ public class Table {
 		    break;
 		}
 	    }
-	    else {
-		for (int q = 1; q < plays.length + 1; q++) {
-		    if ((remain.get(0) == plays[r-1]) && plays[r-1].getChips ==0)) {
-		    System.out.println("Congratulations! Player "+ r + "(" + names[r-1] + ") has won the side pot!");
-		    while (remain.get(q).getChips != 0) {
+	}
+	else {
+	    for (int q = 1; q < plays.length + 1; q++) {
+		if ((remain.get(0) == plays[q-1]) && plays[q-1].getChips() ==0) {
+		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the side pot!");
+		    while (remain.get(q).getChips() != 0) {
 			
 		    }
 		}
 	    }
 	}
     }
-}
+
 
 
     
