@@ -21,15 +21,13 @@ public class Table {
 	for (int i = 0; i < bets.length; i++) {
 	    bets[i] = true;
 	}
-	river = setRiver();
+	river = new Card[5];
 	plays = gamblers;
     }
     
-    public Card[] setRiver(){
-	Card[] ans; 
+    public void setRiver(){
 	deck.shuffle();
-	ans = new Card[]{deck.getCard(0,0), deck.getCard(0,1), deck.getCard(0,2), deck.getCard(0,3), deck.getCard(0,4)};
-	return ans;
+	river = new Card[]{deck.getCard(0,0), deck.getCard(0,1), deck.getCard(0,2), deck.getCard(0,3), deck.getCard(0,4)};
     }
 
     public void deal() {
@@ -122,6 +120,10 @@ public class Table {
 		}
 		a.setChips(0);
 	}
+    }
+
+    public void play() {
+	setRiver();
     }
     
     public static void main(String[] args) {
