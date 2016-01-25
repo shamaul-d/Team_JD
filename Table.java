@@ -124,6 +124,7 @@ public class Table {
 
     public void play() {
 	setRiver();
+	deal();
     }
     
     public static void main(String[] args) {
