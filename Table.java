@@ -1,4 +1,6 @@
 import cs1.Keyboard;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Table {
 
@@ -129,6 +131,7 @@ public class Table {
 
     public void play() {
 	int[] pot = main;
+	ArrayList<Player> remain = new ArrayList<Player>();
 	setRiver();
 	deal();
 	for (int c = 0; c < 5; c++) {
@@ -137,7 +140,7 @@ public class Table {
 		    System.out.print("Would you like to call, raise, or fold? You can also peek at your cards if you must. (c, r, f ot p): "); 
 		    String ans = Keyboard.readString();
 		    if (ans.equals("c")) {
-			if (pot.equals(main)) {
+			if (Arrays.equals(pot,main)) {
 			    call(plays[x],main);
 			}
 			else {
@@ -167,15 +170,44 @@ public class Table {
 	    }
 	}
 	for (int a = 0; a < plays.length; a++) {
-	    int max1 = 0;
-	    int max2 = 0; //invoked in case of sidepot
 	    if (isNotFolded(plays[a])) {
-		if (pot.equals(main)) {
-
+		remain.add(plays[a]);
+	    }
+	}
+	for (int b = 0; b < remain.size(); b++) {
+	    for (int m = remain.size()-1; m > 1; m--) {
+		if (remain.get(m-1).compareTo(remain.get(m) > 0)) {
+		    Player temp = remain.get(m-1);
+		    remain.set(m-1, remain.get(m));
+		    remain.set(m, temp);
+		}
+	    } 
+	}
+	if (Arrays.equals(pot,main)) {
+	    for (int r = 1; r < plays.length + 1; r++) {
+		if (remain.get(0) == plays[r-1]) {
+		    System.out.println("Congratulations! Player "+ r + "(" + names[r-1] + ") has won the pot!");
+		    for (int n = 1; n < plays.length + 1; n++) {
+			System.out.println("Player " + n + "(" + names[n-1] + ") had: ");
+			System.out.println(plays[n-1].showHand());
+		    }
+		    break;
+		}
+	    }
+	    else {
+		for (int q = 1; q < plays.length + 1; q++) {
+		    if ((remain.get(0) == plays[r-1]) && plays[r-1].getChips ==0)) {
+		    System.out.println("Congratulations! Player "+ r + "(" + names[r-1] + ") has won the side pot!");
+		    while (remain.get(q).getChips != 0) {
+			
+		    }
 		}
 	    }
 	}
     }
+}
+
+
     
     public int[] raiseG(int[] pot, int x) {
 	try {
