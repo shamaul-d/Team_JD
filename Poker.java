@@ -114,11 +114,13 @@ public class Poker {
     }
    
     public static void main(String[] args) {
+	System.out.println("\u001b[2J\u001b[H"); // clears terminal beforehand
 	System.out.print("Welcome to Texas Hold'em Poker! Would you like a list of rules before we begin, or are you ready to go? (type y or n): ");
 	start();
 	String[] names = setup();
 	System.out.println("Would you like to start with the default number of chips, or a custom amount? (default is 100) (type d or c): ");
 	Player[] pl = choice(names);
 	Table lv = new Table(pl);
+	int turns = 1;
     }
 }

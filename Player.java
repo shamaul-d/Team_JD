@@ -72,19 +72,19 @@ public class Player{
     public void setHandLevel() {
         if (isStraightFlush(fullHand))
             handLevel = 8;
-        if (isFourOfAKind(fullHand))
+        else if (isFourOfAKind(fullHand))
             handLevel = 7;
-        if (isFullHouse(fullHand))
+        else if (isFullHouse(fullHand))
             handLevel = 6;
-        if (isFlush(fullHand))
+        else if (isFlush(fullHand))
             handLevel = 5;
-        if (isStraight(fullHand))
+        else if (isStraight(fullHand))
             handLevel = 4;
-        if (isThreeOfAKind(fullHand))
+        else if (isThreeOfAKind(fullHand))
             handLevel = 3;
-        if (isTwoPair(fullHand))
+        else if (isTwoPair(fullHand))
             handLevel = 2;
-        if (isOnePair(fullHand))
+        else if (isOnePair(fullHand))
             handLevel = 1;
     }
 
