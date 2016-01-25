@@ -1,6 +1,6 @@
-public class Table {
-
 import cs1.Keyboard;
+
+public class Table {
 
     private int[] main; // holds current bet and size of pot
 
@@ -94,17 +94,18 @@ import cs1.Keyboard;
 	a.setChips(a.getChips() - pot[0]);
     }
 
-    public void raise(Player a, int[] pot, int bet) {
+    public int[] raise(Player a, int[] pot, int bet) {
 	if (pot[0] >= a.getChips()) {
-	    allIn(a, pot);
-	    return;
+	    pot = allIn(a, pot);
+	    return pot;
 	}
 	pot[1] += bet;
 	pot[0] = bet;
 	a.setChips(a.getChips() - pot[0]);
+	return pot;
     }
 
-    public void allIn(Player a , int[] pot) {
+    public int[] allIn(Player a , int[] pot) {
 	pot[1] += a.getChips();
 	a.setChips(0);
 	if (countGams() == 2) {
@@ -114,6 +115,7 @@ import cs1.Keyboard;
 		    break;
 		}
 	    }
+	    return main;
 	}
 	else {
 		side[0] += a.getChips();
@@ -121,6 +123,7 @@ import cs1.Keyboard;
 		    side[1] = a.getChips();
 		}
 		a.setChips(0);
+		return side;
 	}
     }
 
@@ -128,18 +131,75 @@ import cs1.Keyboard;
 	int[] pot = main;
 	setRiver();
 	deal();
-	for (int x = 0; x < plays.length; x++) {
-	    System.out.print("Would you like to call, raise, or fold? (c, r or f): "); 
-	    String ans = Keyboard.readString();
-	    if (ans.equals("c")) {
-		if (pot.equals(main)) {
-		    call(plays[x],main);
+	for (int c = 0; c < 5; c++) {
+	    for (int x = 0; x < plays.length; x++) {
+		if (isNotFolded(plays[x])) {
+		    System.out.print("Would you like to call, raise, or fold? You can also peek at your cards if you must. (c, r, f ot p): "); 
+		    String ans = Keyboard.readString();
+		    if (ans.equals("c")) {
+			if (pot.equals(main)) {
+			    call(plays[x],main);
+			}
+			else {
+			    call(plays[x],side);
+			}
+		    }
+		    else if (ans.equals("r")) {
+			System.out.println("By how much?");
+			pot = raiseG(pot,x);
+		    }
+		    else if (ans.equals("f")) {
+			fold(plays[x]);
+		    }
+		    else if (ans.equals("p")) {
+			plays[x].showHand();
+		    }
+		    else {
+			System.out.println("Sorry, we didn't get that.");
+			play();
+			return;
+		    }
 		}
-		else {
-		    call(plays[x],side);
+	    }
+	    System.out.println("Revealing card in river:");
+	    for (int y = 0; y < c; y++) {
+		System.out.println(y + ": " + retCard(y));
+	    }
+	}
+	for (int a = 0; a < plays.length; a++) {
+	    int max1 = 0;
+	    int max2 = 0; //invoked in case of sidepot
+	    if (isNotFolded(plays[a])) {
+		if (pot.equals(main)) {
+
 		}
 	    }
 	}
+    }
+    
+    public int[] raiseG(int[] pot, int x) {
+	try {
+	    int r = Integer.parseInt(Keyboard.readString());
+	    if (r <= 0) {
+		System.out.println("Be serious please.");
+		pot = raiseG(pot,x);
+		return pot;
+	    }
+	    else {
+		if (pot.equals(main)) {
+		    pot = raise(plays[x],main,r);
+		}
+		else {
+		    pot = raise(plays[x],side,r);
+		}
+	    }
+	}
+	catch (Exception e) {
+	    System.out.println("A number, please.");
+	    pot = raiseG(pot,x);
+	    return pot;
+	}
+	return pot;
     }
     
     public static void main(String[] args) {
