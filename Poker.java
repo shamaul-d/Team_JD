@@ -119,5 +119,6 @@ public class Poker {
 	String[] names = setup();
 	System.out.println("Would you like to start with the default number of chips, or a custom amount? (default is 100) (type d or c): ");
 	Player[] pl = choice(names);
+	Table lv = new Table(pl);
     }
 }
