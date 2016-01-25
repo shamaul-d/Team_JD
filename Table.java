@@ -102,7 +102,7 @@ public class Table {
 	    return pot;
 	}
 	pot[1] += bet;
-	pot[0] = bet;
+	pot[0] += bet;
 	a.setChips(a.getChips() - pot[0]);
 	return pot;
     }
@@ -142,43 +142,49 @@ public class Table {
 	deal();
 	for (int c = 0; c < 5; c++) {
 	    for (int x = 1; x < plays.length + 1; x++) {
-	if (isNotFolded(plays[x-1])) {
-	    System.out.println(plays[x-1].showHand());
-	    System.out.print("Player " + x + "(" + names[x-1] + "): " + "Would you like to call, raise, or fold? You can also peek at your cards if you must. (c, r, f or p): "); 
-	    playerFunctions(pot, x-1);
-	}
-	System.out.println("Revealing card in river:");
-	for (int y = 0; y < c; y++) {
-	    System.out.println(y + ": " + retCard(y));
-	}
-	    }
-	    for (int a = 0; a < plays.length; a++) {
-		if (isNotFolded(plays[a])) {
-		remain.add(plays[a]);
+		if (isNotFolded(plays[x-1])) 
+		    if (x == 1){
+			System.out.println("\u001b[2J\u001b[H");
+		    }
+		    System.out.println("Current bet is " + pot[0] + ".");
+		    System.out.println("Current pot size is " + pot[1] + ".");	    
+		    System.out.println(plays[x-1].showHand());
+		    System.out.print("Player " + x + "(" + names[x-1] + "): " + "Would you like to call, raise, or fold? You can also peek at your cards if you must. (c, r, f or p): "); 
+		    playerFunctions(pot, x-1);
 		}
+	    System.out.println("\u001b[2J\u001b[H");
+	    System.out.println("Revealing card in river:");
+	    for (int y = 0; y <= c; y++) {
+		System.out.println(y + ": " + retCard(y));
 	    }
-	    for (int b = 0; b < remain.size(); b++) {
-		for (int m = remain.size()-1; m > 1; m--) {
-		    if (remain.get(m-1).compareTo(remain.get(m)) > 0) {
+	}
+	for (int a = 0; a < plays.length; a++) {
+	    if (isNotFolded(plays[a])) {
+		remain.add(plays[a]);
+	    }
+	}
+	for (int b = 0; b < remain.size(); b++) {
+	    for (int m = remain.size()-1; m > 1; m--) {
+		if (remain.get(m-1).compareTo(remain.get(m)) > 0) {
 		    Player temp = remain.get(m-1);
 		    remain.set(m-1, remain.get(m));
 		    remain.set(m, temp);
-		    }
-		} 
-	}
-	    if (Arrays.equals(pot,main)) {
-		for (int r = 1; r < plays.length + 1; r++) {
-		    if (remain.get(0) == plays[r-1]) {
-			System.out.println("Congratulations! Player "+ r + "(" + names[r-1] + ") has won the pot!");
-			win(plays[r-1],main);
-			break;
-		    }
 		}
+	    } 
 	}
-	    else {
-		for (int q = 1; q < plays.length + 1; q++) {
-		    if ((remain.get(0) == plays[q-1]) && plays[q-1].getChips() ==0) {
-			System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the side pot!");
+	if (Arrays.equals(pot,main)) {
+	    for (int r = 1; r < plays.length + 1; r++) {
+		if (remain.get(0) == plays[r-1]) {
+		    System.out.println("Congratulations! Player "+ r + "(" + names[r-1] + ") has won the pot!");
+		    win(plays[r-1],main);
+		    break;
+		}
+	    }
+	}
+	else {
+	    for (int q = 1; q < plays.length + 1; q++) {
+		if ((remain.get(0) == plays[q-1]) && plays[q-1].getChips() ==0) {
+		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the side pot!");
 		    win(plays[q-1],side);
 		    while (remain.get(q).getChips() != 0) {
 			q++;
@@ -186,23 +192,23 @@ public class Table {
 		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the main pot!");
 		    win(plays[q-1],main);
 		}
-		    else if (remain.get(0) == plays[q-1]) {
-			System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the main pot!");
-			win(plays[q-1],main);
-			while (remain.get(q).getChips() == 0) {
-			    q++;
-			}
-			System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the side pot!");
-			win(plays[q-1],side);
+		else if (remain.get(0) == plays[q-1]) {
+		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the main pot!");
+		    win(plays[q-1],main);
+		    while (remain.get(q).getChips() == 0) {
+			q++;
 		    }
+		    System.out.println("Congratulations! Player "+ q + "(" + names[q-1] + ") has won the side pot!");
+		    win(plays[q-1],side);
 		}
 	    }
-	    for (int n = 1; n < plays.length + 1; n++) {
-		System.out.println("Player " + n + "(" + names[n-1] + ") had: ");
-		System.out.println(plays[n-1].showHand());
-	    }
+	}
+	for (int n = 1; n < plays.length + 1; n++) {
+	    System.out.println("Player " + n + "(" + names[n-1] + ") had: ");
+	    System.out.println(plays[n-1].showHand());
 	}
     }
+
 
 
     
@@ -236,17 +242,24 @@ public class Table {
 	if (ans.equals("c")) {
 	    if (Arrays.equals(pot,main)) {
 		call(plays[x],main);
+		System.out.println("Calling bet of " + main[0] +"...");
 	    }
 	    else {
 		call(plays[x],side);
+		System.out.println("Calling bet of " + side[0] +"...");
 	    }
 	}
 	else if (ans.equals("r")) {
 	    System.out.println("By how much?");
 	    pot = raiseG(pot,x);
+	    if (Arrays.equals(pot, main)) {
+		System.out.println("Raising bet to bet of " + main[0] +"...");	    }
+	    else {
+		System.out.println("Raising bet to bet of " + side[0] +"...");	  	    }
 	}
 	else if (ans.equals("f")) {
 	    fold(plays[x]);
+	    System.out.println("Folding...");	  	
 	}
 	else if (ans.equals("p")) {
 	    plays[x].showHand();

@@ -124,8 +124,10 @@ public class PokerDriver {
 	Player[] pl = choice(names);
 	Table lv = new Table(pl);
 	int turns = 1;
-	System.out.println("Turn #: " + turns);
-	lv.play(names);
+	while (true) {
+	    System.out.println("Turn #: " + turns);
+	    lv.play(names);
+	}
     }
 }
 
