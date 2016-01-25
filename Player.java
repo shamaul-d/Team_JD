@@ -20,7 +20,6 @@ public class Player{
 
     public Player(int ch) {
         setChips(ch);
-	setChips(ch);
     }
 
     public String showHand(){
@@ -59,6 +58,7 @@ public class Player{
         hand[0] = a;
         hand[1] = b;
     }
+
 
     public void setFullHand(Card[] hand, Card[] riv) {
         for (int x = 0; x < 2; x++) {
@@ -256,7 +256,7 @@ public class Player{
             return false;
     }
 
-    public boolean isStraight(Card[] x){ //broken
+    public boolean isStraight(Card[] x){
         boolean retBol = false;
         int[] numInt = new int[7];
         int counter = 0;
@@ -413,6 +413,104 @@ public class Player{
 	return retArray;
     }
 
+    public int[] getStraight(Card[] x){
+	boolean retBol = false;
+	int[] retArray = new int[5];
+        int[] numInt = new int[7];
+        numInt = cardToInt(x);
+        int[] numValsInt = removeDouble(numInt);
+        for (int i = 0; i < numValsInt.length - 2; i++){
+            if(numValsInt[i] == numValsInt[i+1]-1)
+                if(numValsInt[i] == numValsInt[i+2]-2)
+                    if(numValsInt[i] == numValsInt[i+3]-3)
+                        if(numValsInt[i] == numValsInt[i+4]-4)
+                            if(numValsInt[i] == numValsInt[i+5]-5){
+                                retArray[0] = numValsInt[i];
+				retArray[1] = numValsInt[i+1];
+				retArray[2] = numValsInt[i+2];
+				retArray[3] = numValsInt[i+3];
+				retArray[4] = numValsInt[i+4];
+				retBol = true;
+			    }
+        }
+        if (!retBol){
+            if (aceSwitch(numValsInt)){ //Checks with both ace values
+                for (int i = 0; i < numValsInt.length - 2; i++){
+                    if(numValsInt[i] == numValsInt[i+1]-1)
+                        if(numValsInt[i] == numValsInt[i+2]-2)
+                            if(numValsInt[i] == numValsInt[i+3]-3)
+                                if(numValsInt[i] == numValsInt[i+4]-4)
+                                    if(numValsInt[i] == numValsInt[i+5]-5){
+					retArray[0] = numValsInt[i];
+					retArray[1] = numValsInt[i+1];
+					retArray[2] = numValsInt[i+2];
+					retArray[3] = numValsInt[i+3];
+					retArray[4] = numValsInt[i+4];
+				    }
+                                        
+                }
+            }
+        }
+        return retArray;
+    }
+
+    public int suitStringToInt(String x){
+	int retInt = -1;
+	if (x.equals("diamond"))
+	    retInt = 1;
+	else if (x.equals("club"))
+	    retInt = 2;
+	else if (x.equals("heart"))
+	    retInt = 3;
+	else if (x.equals("spade"))
+	    retInt = 4;
+	return retInt;
+    }
+	
+	    
+	
+    
+    public int getFlushInt(Card[] x){
+        int retInt = -1;
+        String[] suits = cardToSuit(x);
+        int counter = 0;
+        for(int i = 0; i < 3; i++){
+            counter = 0; //reset counter
+            for (int j = i; j < suits.length; j++){
+                if(suits[i].equals(suits[j]))
+                    counter++;
+            }
+            if (counter >= 4){
+                retInt = suitStringToInt(suits[i]);
+                break;
+            }
+        }
+        return retInt;
+
+    }
+
+    public int getFourOfAKindCard(Card[] x){
+        int retInt = -1;
+        int[] cardVals = new int[7];
+        int counter = 0;
+        cardVals = cardToInt(x);
+        for(int i = 0; i < 2; i++){
+            counter = 0; //reset counter
+            for (int j = i; j < cardVals.length; j++){
+                if(cardVals[i] == cardVals[j])
+                    counter++;
+            }
+            if (counter == 4){
+		retInt = cardVals[i];
+		break;
+            }
+        }
+        return retInt;
+    }
+
+
+
+
     //===============CompareTo Functions================
 
 
@@ -435,21 +533,86 @@ public class Player{
 			    retInt = -1;
 		    }
 		}
-		else if (a.getHandLevel() == 2){
+		else if (this.getHandLevel() == 2){
 		    int[] twoPairHandA = sortArray(twoPairGet(this.getFullHand()));
 		    int[] twoPairHandB = sortArray(twoPairGet(a.getFullHand()));
+		    if (twoPairHandA[1] > twoPairHandB[1])
+			retInt = 1;
+		    else if (twoPairHandB[1] > twoPairHandA[1])
+			retInt = -1;
+		    else if (twoPairHandB[1] == twoPairHandA[1]){
+			if (twoPairHandA[0] > twoPairHandB[0])
+			    retInt = -1;
+			else
+			    retInt = 1;
+		    }
 		}
-			
+		else if (this.getHandLevel() == 3){
+		    if(getOnePair(this.getFullHand()) > getOnePair(a.getFullHand()))
+			retInt = 1;
+		    else if(getOnePair(this.getFullHand()) < getOnePair(a.getFullHand()))
+			retInt = -1;
+		    else if(getOnePair(this.getFullHand()) == getOnePair(a.getFullHand()))
+			retInt = 0;
+		}
+		else if (this.getHandLevel() == 4){
+		    int[] straightA = getStraight(this.getFullHand());
+		    int[] straightB = getStraight(a.getFullHand());
+		    if (straightA[4] > straightB[4])
+			retInt = 1;
+		    else if(straightB[4] > straightA[4])
+			retInt = -1;
+		    else
+			retInt = 0;
+		}
+		else if (this.getHandLevel() == 5){
+		    if (getFlushInt(this.getFullHand()) > getFlushInt(a.getFullHand()))
+			retInt = 1;
+		    else if (getFlushInt(this.getFullHand()) < getFlushInt(a.getFullHand()))
+			retInt = -1;
+		    else
+			retInt = 0;
+				
+		}
+		else if (this.getHandLevel() == 6){
+		    int[] fullHouseIntA = cardToInt(this.getFullHand());
+		    int[] fullHouseIntB = cardToInt(a.getFullHand());
+		    if (threeOfAKindRetInt(this.getFullHand()) > threeOfAKindRetInt(a.getFullHand()))
+			retInt = 1;
+		    else if (threeOfAKindRetInt(this.getFullHand()) < threeOfAKindRetInt(a.getFullHand()))
+			retInt = -1;
+		    else
+			retInt = 0;
+		}
+		else if (this.getHandLevel() == 7){
+		    if (getFourOfAKindCard(this.getFullHand()) > getFourOfAKindCard(a.getFullHand()))
+			retInt = 1;
+		    else if (getFourOfAKindCard(this.getFullHand()) < getFourOfAKindCard(a.getFullHand()))
+			retInt = -1;
+		    else
+			retInt = 0;
+		}
+		else if (this.getHandLevel() == 8){
+		    int[] straightIntA = getStraight(this.getFullHand());
+		    int[] straightIntB = getStraight(a.getFullHand());
+		    if (straightIntA[4] > straightIntB[4])
+			retInt = 1;
+		    if (straightIntA[4] < straightIntB[4])
+			retInt = -1;
+		    else
+			retInt = 0;
+		}
+
 	    }
-	    return retInt;
-        }
+	    return retInt;   
+	}
 
 
 
 
 
 
-    /* public static void main(String[] args){
+    public static void main(String[] args){
         Player me = new Player();
         Table a = new Table(new Player[] {me});
         me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
@@ -463,12 +626,11 @@ public class Player{
         for (int i = 0; i < 7; i++) {
             System.out.println(me.fullHand[i]);
         }
-        System.out.println(highCard(me.fullHand));
         Player niels = new Player();
         System.out.println(niels.getChips());
         Player sham = new Player(1000);
         System.out.println(sham.getChips());
     }
-    */
+    
 
 }
