@@ -20,7 +20,6 @@ public class Player{
 
     public Player(int ch) {
         setChips(ch);
-	setChips(ch);
     }
 
     public String showHand(){
@@ -613,7 +612,7 @@ public class Player{
 
 
 
-    /* public static void main(String[] args){
+    public static void main(String[] args){
         Player me = new Player();
         Table a = new Table(new Player[] {me});
         me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
@@ -627,12 +626,11 @@ public class Player{
         for (int i = 0; i < 7; i++) {
             System.out.println(me.fullHand[i]);
         }
-        System.out.println(highCard(me.fullHand));
         Player niels = new Player();
         System.out.println(niels.getChips());
         Player sham = new Player(1000);
         System.out.println(sham.getChips());
     }
-    */
+    
 
 }
