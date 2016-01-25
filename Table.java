@@ -1,5 +1,7 @@
 public class Table {
 
+import cs1.Keyboard;
+
     private int[] main; // holds current bet and size of pot
 
     private int[] side; // same qualities
@@ -123,8 +125,21 @@ public class Table {
     }
 
     public void play() {
+	int[] pot = main;
 	setRiver();
 	deal();
+	for (int x = 0; x < plays.length; x++) {
+	    System.out.print("Would you like to call, raise, or fold? (c, r or f): "); 
+	    String ans = Keyboard.readString();
+	    if (ans.equals("c")) {
+		if (pot.equals(main)) {
+		    call(plays[x],main);
+		}
+		else {
+		    call(plays[x],side);
+		}
+	    }
+	}
     }
     
     public static void main(String[] args) {
