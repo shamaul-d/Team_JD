@@ -415,7 +415,8 @@ public class Player{
     }
 
     public int[] getStraight(Card[] x){
-        int[] retArray = new int[5];
+	boolean retBol = false;
+	int[] retArray = new int[5];
         int[] numInt = new int[7];
         numInt = cardToInt(x);
         int[] numValsInt = removeDouble(numInt);
@@ -430,6 +431,7 @@ public class Player{
 				retArray[2] = numValsInt[i+2];
 				retArray[3] = numValsInt[i+3];
 				retArray[4] = numValsInt[i+4];
+				retBol = true;
 			    }
         }
         if (!retBol){
@@ -451,6 +453,60 @@ public class Player{
             }
         }
         return retArray;
+    }
+
+    public int suitStringToInt(String x){
+	int retInt = -1;
+	if (x.equals("diamond"))
+	    retInt = 1;
+	else if (x.equals("club"))
+	    retInt = 2;
+	else if (x.equals("heart"))
+	    retInt = 3;
+	else if (x.equals("spade"))
+	    retInt = 4;
+	return retInt;
+    }
+	
+	    
+	
+    
+    public int getFlushInt(Card[] x){
+        int retInt = -1;
+        String[] suits = cardToSuit(x);
+        int counter = 0;
+        for(int i = 0; i < 3; i++){
+            counter = 0; //reset counter
+            for (int j = i; j < suits.length; j++){
+                if(suits[i].equals(suits[j]))
+                    counter++;
+            }
+            if (counter >= 4){
+                retInt = suitStringToInt(suits[i]);
+                break;
+            }
+        }
+        return retInt;
+
+    }
+
+    public int getFourOfAKindCard(Card[] x){
+        int retInt = -1;
+        int[] cardVals = new int[7];
+        int counter = 0;
+        cardVals = cardToInt(x);
+        for(int i = 0; i < 2; i++){
+            counter = 0; //reset counter
+            for (int j = i; j < cardVals.length; j++){
+                if(cardVals[i] == cardVals[j])
+                    counter++;
+            }
+            if (counter == 4){
+		retInt = cardVals[i];
+		break;
+            }
+        }
+        return retInt;
     }
 
 
@@ -500,10 +556,54 @@ public class Player{
 		    else if(getOnePair(this.getFullHand()) == getOnePair(a.getFullHand()))
 			retInt = 0;
 		}
-		else if (this.gethHandLevel() == 4){
-		    
+		else if (this.getHandLevel() == 4){
+		    int[] straightA = getStraight(this.getFullHand());
+		    int[] straightB = getStraight(a.getFullHand());
+		    if (straightA[4] > straightB[4])
+			retInt = 1;
+		    else if(straightB[4] > straightA[4])
+			retInt = -1;
+		    else
+			retInt = 0;
+		}
+		else if (this.getHandLevel() == 5){
+		    if (getFlushInt(this.getFullHand()) > getFlushInt(a.getFullHand()))
+			retInt = 1;
+		    else if (getFlushInt(this.getFullHand()) < getFlushInt(a.getFullHand()))
+			retInt = -1;
+		    else
+			retInt = 0;
 				
-			
+		}
+		else if (this.getHandLevel() == 6){
+		    int[] fullHouseIntA = cardToInt(this.getFullHand());
+		    int[] fullHouseIntB = cardToInt(a.getFullHand());
+		    if (threeOfAKindRetInt(this.getFullHand()) > threeOfAKindRetInt(a.getFullHand()))
+			retInt = 1;
+		    else if (threeOfAKindRetInt(this.getFullHand()) < threeOfAKindRetInt(a.getFullHand()))
+			retInt = -1;
+		    else
+			retInt = 0;
+		}
+		else if (this.getHandLevel() == 7){
+		    if (getFourOfAKindCard(this.getFullHand()) > getFourOfAKindCard(a.getFullHand()))
+			retInt = 1;
+		    else if (getFourOfAKindCard(this.getFullHand()) < getFourOfAKindCard(a.getFullHand()))
+			retInt = -1;
+		    else
+			retInt = 0;
+		}
+		else if (this.getHandLevel() == 8){
+		    int[] straightIntA = getStraight(this.getFullHand());
+		    int[] straightIntB = getStraight(a.getFullHand());
+		    if (straightIntA[4] > straightIntB[4])
+			retInt = 1;
+		    if (straightIntA[4] < straightIntB[4])
+			retInt = -1;
+		    else
+			retInt = 0;
+		}
+
 	    }
 	    return retInt;   
 	}
