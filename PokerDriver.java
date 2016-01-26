@@ -135,6 +135,7 @@ public class PokerDriver {
 	    System.out.println("Turn #: " + turns);
 	    lv.play(names);
 	}
+	System.out.println("Congrats! You are the last player standing. You are truly an amazing gambler that should be in Vegas.");
     }
 }
 
