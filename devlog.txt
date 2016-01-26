@@ -77,3 +77,7 @@ ___________|_____________|_______________
 
 1-25-16     Niels 	  Finished player compareTo and began working out kinks there 
 
+1-26-16     Niels 	  Tested for bugs while playing the game 
+
+1-26-16     Shamaul 	  Fixed bugs found
+
