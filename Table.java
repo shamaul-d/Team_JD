@@ -10,6 +10,8 @@ public class Table {
 
     private boolean[] bets; // holds data if players are betting or not
 
+    private int bet; // number of active people in the hand
+
     private Card[] river; // holds the cards for the river
     
     private Deck deck; // holds a deck of cards
@@ -82,6 +84,7 @@ public class Table {
 	for (int x = 0; x < plays.length; x++) {
 	    if (a.toString().equals(plays[x].toString())) {
 		bets[x] = false;
+		bet++;
 		break;
 	    }
 	}
@@ -138,20 +141,26 @@ public class Table {
     public void play(String[] names) {
 	int[] pot = main;
 	ArrayList<Player> remain = new ArrayList<Player>();
+	bet = 0;
 	setRiver();
 	deal();
 	for (int c = 0; c < 5; c++) {
 	    for (int x = 1; x < plays.length + 1; x++) {
-		if (isNotFolded(plays[x-1])) 
+		if (isNotFolded(plays[x-1])) { 
+		    if  (bet == plays.length-1) {
+			System.out.println("Congratulations! Player " + x + "(" + names[x-1] + ") has won the main pot!");
+			win(plays[x-1],main);
+			return;
+		    }
 		    if (x == 1){
 			System.out.println("\u001b[2J\u001b[H");
 		    }
-		    System.out.println("Current bet is " + pot[0] + ".");
-		    System.out.println("Current pot size is " + pot[1] + ".");	    
-		    System.out.println(plays[x-1].showHand());
-		    System.out.print("Player " + x + "(" + names[x-1] + "): " + "Would you like to call, raise, or fold? You can also peek at your cards if you must. (c, r, f or p): "); 
-		    playerFunctions(pot, x-1);
 		}
+		System.out.println("Current bet is " + pot[0] + ".");
+		System.out.println("Current pot size is " + pot[1] + ".");	    		System.out.println(plays[x-1].showHand());
+		System.out.print("Player " + x + "( " + names[x-1] + " ): " + "Would you like to call, raise, or fold? You can also peek at your cards if you must. (c, r, f or p): "); 
+		playerFunctions(pot, x-1);
+	    }
 	    System.out.println("\u001b[2J\u001b[H");
 	    System.out.println("Revealing card in river:");
 	    for (int y = 0; y <= c; y++) {
