@@ -161,7 +161,19 @@ public class Player{
     public int[] listRemove(int[] x, int y){
         int[] retArray = new int[4];
         int counter = 0;
-        for(int i = 0; i < 7; i++){
+        for(int i = 0; counter != 4; i++){
+            if(x[i] != y){
+                retArray[counter] = x[i];
+                counter++;
+            }
+        }
+        return retArray;
+    }
+
+    public int[] listRemoveOnePair(int[] x, int y){
+        int[] retArray = new int[5];
+        int counter = 0;
+        for(int i = 0; counter != 5; i++){
             if(x[i] != y){
                 retArray[counter] = x[i];
                 counter++;
@@ -247,6 +259,48 @@ public class Player{
         return retBol;
     }
 
+    public boolean isOnePairInt(int[] x){
+	boolean retBol = false;
+        for (int i = 0; i < x.length; i++)
+	    for (int j = i + 1; j < x.length; j++)
+		if(x[i] == x[j]){
+		    retBol = true;
+		    break;
+		}
+	return retBol;
+    }
+    public int getOnePairInt(int[] x){
+	int retInt = -1;
+        for (int i = 0; i < x.length; i++)
+	    for (int j = i + 1; j < x.length; j++)
+		if(x[i] == x[j]){
+		    retInt = x[i];
+		    break;
+		}
+	return retInt;
+    }
+	
+    
+    public int[] isStraightCondence(Card[] x){
+	int[] numInt = new int[7];
+	numInt = cardToInt(x);
+	if (isOnePair(x)){
+	    int[] numValsInt1 = removeDouble(numInt);
+	    if (isOnePairInt(numValsInt1)){
+		int[] numValsInt2 = removeDouble(numValsInt1);
+		if (isOnePairInt(numValsInt2)){
+		    int[] z = {-1};
+		    return z; //array will be less than 4 cards long and cannot be a straight
+		}
+		return numValsInt2;
+	    }
+	    return numValsInt1;
+	}
+	return numInt;
+    }
+	
+	
+
 
                 //===========Winning Hand Calculation Function=======================
     public boolean isStraightFlush(Card[] x){
@@ -258,30 +312,40 @@ public class Player{
 
     public boolean isStraight(Card[] x){
         boolean retBol = false;
-        int[] numInt = new int[7];
         int counter = 0;
-        numInt = cardToInt(x);
-        int[] numValsInt = removeDouble(numInt);
-        for (int i = 0; i < numValsInt.length - 2; i++){
-            if(numValsInt[i] == numValsInt[i+1]-1)
-                if(numValsInt[i] == numValsInt[i+2]-2)
-                    if(numValsInt[i] == numValsInt[i+3]-3)
-                        if(numValsInt[i] == numValsInt[i+4]-4)
-                            if(numValsInt[i] == numValsInt[i+5]-5)
-                                retBol = true;
-        }
-        if (!retBol){
-            if (aceSwitch(numValsInt)){ //Checks with both ace values
-                for (int i = 0; i < numValsInt.length - 2; i++){
-                    if(numValsInt[i] == numValsInt[i+1]-1)
-                        if(numValsInt[i] == numValsInt[i+2]-2)
-                            if(numValsInt[i] == numValsInt[i+3]-3)
-                                if(numValsInt[i] == numValsInt[i+4]-4)
-                                    if(numValsInt[i] == numValsInt[i+5]-5)
-                                        retBol = true;
-                }
-            }
-        }
+	int[] numValsInt = isStraightCondence(x);
+	if (numValsInt.length >= 5){
+	    for (int i = 0; i < numValsInt.length - 5; i++){
+		if(numValsInt[i] == numValsInt[i+1]-1){
+		    if(numValsInt[i] == numValsInt[i+2]-2){
+			if(numValsInt[i] == numValsInt[i+3]-3){
+			    if(numValsInt[i] == numValsInt[i+4]-4){
+				if(numValsInt[i] == numValsInt[i+5]-5){
+				    retBol = true;
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	    if (!retBol){
+		if (aceSwitch(numValsInt)){ //Checks with both ace values
+		    for (int i = 0; i < numValsInt.length - 5; i++){
+			if(numValsInt[i] == numValsInt[i+1]-1){
+			    if(numValsInt[i] == numValsInt[i+2]-2){
+				if(numValsInt[i] == numValsInt[i+3]-3){
+				    if(numValsInt[i] == numValsInt[i+4]-4){
+					if(numValsInt[i] == numValsInt[i+5]-5){
+					    retBol = true;					    
+					}
+				    }
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
         return retBol;
     }
 
@@ -363,7 +427,7 @@ public class Player{
         int[] cardValue = cardToInt(x);
         if (isOnePair(x)){
             int firstPair = isOnePairReturn(x);
-            int[] fiveCard = listRemove(cardValue, firstPair);
+            int[] fiveCard = listRemoveOnePair(cardValue, firstPair);
             if (intIsOnePair(fiveCard))
                 retBol = true;
 
@@ -516,6 +580,8 @@ public class Player{
 
         public int compareTo(Player a){
             int retInt = 0;
+	    a.setHandLevel();
+	    this.setHandLevel();
             if (this.getHandLevel() > a.getHandLevel())
                 retInt = 1;
             else if (this.getHandLevel() < a.getHandLevel())
@@ -623,23 +689,24 @@ public class Player{
     public static void main(String[] args){
         Player me = new Player();
 	Player hi = new Player();
-        Table a = new Table(new Player[] {me});
+        Table a = new Table(new Player[] {me, hi});
+	a.setRiver();
         me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
-        System.out.println(me.hand);
-        me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
+	hi.hand = new Card[]{a.getDeck().getCard(3,9), a.getDeck().getCard(2,12)};
 	
+        me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
+	hi.fullHand = new Card[]{hi.hand[0], hi.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
+
         for (int i = 0; i < 7; i++) {
             System.out.println(me.fullHand[i]);
         }
-        // ^^ test setup mech, if want to mess with go to table
-        System.out.print(me.isFullHouse(me.fullHand));
-        for (int i = 0; i < 7; i++) {
-            System.out.println(me.fullHand[i]);
+	System.out.println("second hand");
+	for (int i = 0; i < 7; i++) {
+            System.out.println(hi.fullHand[i]);
         }
-        Player niels = new Player();
-        System.out.println(niels.getChips());
-        Player sham = new Player(1000);
-        System.out.println(sham.getChips());
+	System.out.println(hi.getHandLevel());
+	System.out.println(me.getHandLevel());
+	System.out.println(hi.compareTo(me));
     }
     
 
