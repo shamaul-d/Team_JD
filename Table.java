@@ -254,6 +254,10 @@ public class Table {
 		bankrupt[d] = false;
 	    }
 	    bets[d] = true;
+	    main[0] = 5;
+	    main[1] = 0;
+	    side[0] = 0;
+	    side[1] = 0;
 	}
     }
 
