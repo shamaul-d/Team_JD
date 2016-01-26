@@ -124,7 +124,14 @@ public class PokerDriver {
 	Player[] pl = choice(names);
 	Table lv = new Table(pl);
 	int turns = 1;
-	while (true) {
+	boolean cont = true;
+	int x = 0;
+	for (int y = 0; y < pl.length; y++) {
+	    if (! lv.isNotBankrupt(pl[y])) {
+		x += 1;
+	    }
+	}
+	while (x < pl.length - 1) {
 	    System.out.println("Turn #: " + turns);
 	    lv.play(names);
 	}

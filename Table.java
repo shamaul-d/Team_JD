@@ -12,6 +12,8 @@ public class Table {
 
     private int bet; // number of active people in the hand
 
+    private boolean[] bankrupt; // if a player has lost all their funds
+
     private Card[] river; // holds the cards for the river
     
     private Deck deck; // holds a deck of cards
@@ -26,6 +28,10 @@ public class Table {
 	bets = new boolean[gamblers.length];
 	for (int i = 0; i < bets.length; i++) {
 	    bets[i] = true;
+	}
+	bankrupt = new boolean[gamblers.length];
+	for (int i = 0; i < bankrupt.length; i++) {
+	    bankrupt[i] = true;
 	}
 	river = new Card[5];
 	plays = gamblers;
@@ -80,6 +86,15 @@ public class Table {
 	return false;
     }
 
+    public boolean isNotBankrupt(Player c) {
+	for (int x = 0; x < bankrupt.length; x++) {
+	    if (c.toString().equals(plays[x].toString())) {
+		return bankrupt[x];
+	    }
+	}
+	return false;
+    }
+
     public void fold(Player a) {
 	for (int x = 0; x < plays.length; x++) {
 	    if (a.toString().equals(plays[x].toString())) {
@@ -111,6 +126,7 @@ public class Table {
     }
 
     public int[] allIn(Player a , int[] pot) {
+	System.out.println("All in!");
 	pot[1] += a.getChips();
 	a.setChips(0);
 	if (countGams() == 2) {
@@ -146,7 +162,7 @@ public class Table {
 	deal();
 	for (int c = 0; c < 5; c++) {
 	    for (int x = 1; x < plays.length + 1; x++) {
-		if (isNotFolded(plays[x-1])) { 
+		if (isNotFolded(plays[x-1]) && isNotBankrupt(plays[x-1])) { 
 		    if  (bet == plays.length-1) {
 			System.out.println("Congratulations! Player " + x + "(" + names[x-1] + ") has won the main pot!");
 			win(plays[x-1],main);
@@ -216,7 +232,15 @@ public class Table {
 	    System.out.println("Player " + n + "(" + names[n-1] + ") had: ");
 	    System.out.println(plays[n-1].showHand());
 	}
+	for (int d = 0; d < plays.length; d++) {
+	    if (plays[d].getChips() == 0) {
+		System.out.println("Sorry, you've gone bankrupt player " + (d+1) + "(" + names[d] + "). I'm afraid your time at this table is done.");
+		bankrupt[d] = false;
+	    }
+	    bets[d] = true;
+	}
     }
+
 
 
 
