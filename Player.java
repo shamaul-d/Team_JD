@@ -173,7 +173,7 @@ public class Player{
     public int[] listRemoveOnePair(int[] x, int y){
         int[] retArray = new int[5];
         int counter = 0;
-        for(int i = 0; counter != 5; i++){
+        for(int i = 0; i < 7; i++){
             if(x[i] != y){
                 retArray[counter] = x[i];
                 counter++;
@@ -378,7 +378,7 @@ public class Player{
                 if(suits[i].equals(suits[j]))
                     counter++;
             }
-            if (counter >= 4){
+            if (counter >= 5){
                 retBol = true;
                 break;
             }
@@ -439,7 +439,7 @@ public class Player{
         boolean retBol = false;
         int[] cardValue = cardToInt(x);
         for(int i = 0; i < 7; i++){
-            for(int j = i; j < 7; j++){
+            for(int j = i + 1; j < 7; j++){
                 if(cardValue[i] == cardValue[j])
                     retBol = true;
             }
@@ -698,13 +698,15 @@ public class Player{
 	hi.fullHand = new Card[]{hi.hand[0], hi.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
 
         for (int i = 0; i < 7; i++) {
-            System.out.println(me.fullHand[i]);
+            System.out.println(hi.fullHand[i]);
         }
 	System.out.println("second hand");
 	for (int i = 0; i < 7; i++) {
-            System.out.println(hi.fullHand[i]);
+            System.out.println(me.fullHand[i]);
         }
+	hi.setHandLevel();
 	System.out.println(hi.getHandLevel());
+	me.setHandLevel();    
 	System.out.println(me.getHandLevel());
 	System.out.println(hi.compareTo(me));
     }
