@@ -521,7 +521,15 @@ public class Player{
             else if (this.getHandLevel() < a.getHandLevel())
                 retInt = -1;
             else{
-		if (this.getHandLevel() == 1){
+		if (this.getHandLevel() == 0){
+		    Card highCardA = highCard(this.getFullHand());
+		    Card highCardB = highCard(a.getFullHand());
+		    if (highCardA.compareTo(highCardB) == 1)
+			retInt = 1;
+		    else if (highCardA.compareTo(highCardB) == -1)
+			retInt = -1;
+		}		            	    
+		else if (this.getHandLevel() == 1){
 		    if (getOnePair(this.getFullHand()) > getOnePair(a.getFullHand()))
 			retInt = 1;
 		    else if(getOnePair(this.getFullHand()) > getOnePair(a.getFullHand()))
@@ -614,10 +622,12 @@ public class Player{
 
     public static void main(String[] args){
         Player me = new Player();
+	Player hi = new Player();
         Table a = new Table(new Player[] {me});
         me.hand = new Card[]{a.getDeck().getCard(0,5), a.getDeck().getCard(0,6)};
         System.out.println(me.hand);
         me.fullHand = new Card[]{me.hand[0], me.hand[1], a.retCard(0) , a.retCard(1) , a.retCard(2) , a.retCard(3) , a.retCard(4)};
+	
         for (int i = 0; i < 7; i++) {
             System.out.println(me.fullHand[i]);
         }
