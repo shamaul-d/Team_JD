@@ -23,7 +23,7 @@ public class Table {
     public Table(Player[] gamblers){
 	deck = new Deck();
 	main = new int[2];
-	main[0] = 10; //main[1] will get value of 0
+	main[0] = 5; //main[1] will get value of 0
 	side = new int[2]; // both indices will get val of 0
 	bets = new boolean[gamblers.length];
 	for (int i = 0; i < bets.length; i++) {
@@ -151,7 +151,7 @@ public class Table {
     public void win(Player p, int[] pot) {
 	p.setChips(p.getChips() + pot[1]);
 	pot[1] = 0;
-	pot[0] = 10;
+	pot[0] = 5;
     }
 
     public void play(String[] names) {
@@ -160,7 +160,7 @@ public class Table {
 	bet = 0;
 	setRiver();
 	deal();
-	for (int c = 0; c < 5; c++) {
+	for (int c = 0; c < 3; c++) {
 	    for (int x = 1; x < plays.length + 1; x++) {
 		if (isNotFolded(plays[x-1]) && isNotBankrupt(plays[x-1])) { 
 		    if  (bet == plays.length-1) {
@@ -174,13 +174,29 @@ public class Table {
 		}
 		System.out.println("Current bet is " + pot[0] + ".");
 		System.out.println("Current pot size is " + pot[1] + ".");	    		System.out.println(plays[x-1].showHand());
-		System.out.print("Player " + x + "( " + names[x-1] + " ): " + "Would you like to call, raise, or fold? You can also peek at your cards if you must. (c, r, f or p): "); 
+		System.out.print("Player " + x + "( " + names[x-1] + " ): " + "Would you like to call, raise, or fold? (c, r, or f): "); 
 		playerFunctions(pot, x-1);
 	    }
 	    System.out.println("\u001b[2J\u001b[H");
 	    System.out.println("Revealing card in river:");
-	    for (int y = 0; y <= c; y++) {
-		System.out.println(y + ": " + retCard(y));
+	    if (c == 0) {
+		System.out.println(retCard(0));
+		System.out.println(retCard(1)); 
+		System.out.println(retCard(2));
+		pot[0] = 0;
+	    }
+	    else if (c == 1){
+		System.out.println(retCard(0));
+		System.out.println(retCard(1)); 
+		System.out.println(retCard(2));
+		System.out.println(retCard(3));
+	    }
+	    else {
+		System.out.println(retCard(0));
+		System.out.println(retCard(1)); 
+		System.out.println(retCard(2));
+		System.out.println(retCard(3));
+		System.out.println(retCard(4));
 	    }
 	}
 	for (int a = 0; a < plays.length; a++) {
@@ -293,9 +309,6 @@ public class Table {
 	else if (ans.equals("f")) {
 	    fold(plays[x]);
 	    System.out.println("Folding...");	  	
-	}
-	else if (ans.equals("p")) {
-	    plays[x].showHand();
 	}
 	else {
 	    System.out.println("Sorry, we didn't get that.");
