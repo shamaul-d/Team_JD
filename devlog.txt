@@ -38,3 +38,42 @@ ___________|_____________|_______________
 			  to a usable class to store card values.
 
 1-15-16	    Niels 	  Added isStraight, isFlush,  isFourOfAKind, and helper function
+
+1-15-16	    Shamaul 	  Laid foundations for table down. Instance variables and 
+			  Constructor.
+
+1-16-16	    Niels 	  Finished isStraight and added helper functions to turn card values into
+			  Ints 
+
+1-16-16     Shamaul 	  Added getRiver function in table 
+
+1-16-16     Niels 	  Began on isFullHouse and the helper function it uses 
+
+1-16-16     Niels 	  Added listRemove
+
+1-20-16     Shamaul       Tested table and fixed broken functions there. Also Added showHand 
+
+1-21-16	    Niels 	  fixed up Player and added full house, fourOfAKind, and onePair 
+		          functions
+			  
+1-21-16     Shamaul 	  Added basic betting systems such as folding 
+
+1-22-16     Shamaul 	  Wrote call and all in for betting
+
+1-22-16	    Niels         Finished all of the setHand level functionality
+
+1-22-16     Niels 	  Wrote card compareTo
+
+1-22-16     Niels 	  Began on compareTo for players 
+
+1-22-16     Shamaul 	  remerged different files and reworked functions in Card and table 
+
+1-24-16     Niels 	  worked on compareTo for player, specifically functions that help when
+			  hand level was the same
+
+1-24-16     Shamaul       Began writing poker.java which would be our driver file 
+
+1-25-16     Shamaul 	  Finished Poker.java and began troubleshooting 
+
+1-25-16     Niels 	  Finished player compareTo and began working out kinks there 
+
